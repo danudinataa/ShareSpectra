@@ -8,10 +8,10 @@ import kotlinx.parcelize.Parcelize
 data class Character(
 
     @field:SerializedName("images")
-    val images: List<String>,
+    val images: List<String>?,
 
     @field:SerializedName("jutsu")
-    val jutsu: List<String>,
+    val jutsu: List<String>?,
 
     @field:SerializedName("name")
     val name: String,
@@ -20,6 +20,8 @@ data class Character(
     val id: Int,
 
     @field:SerializedName("natureType")
-    val natureType: List<String?>?,
+    val natureType: List<String>?,
 
+    @field:SerializedName("uniqueTraits")
+    val uniqueTraits: List<String>?
 ) : Parcelable

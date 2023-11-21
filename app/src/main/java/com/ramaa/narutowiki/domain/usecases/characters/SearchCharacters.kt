@@ -8,10 +8,9 @@ import kotlinx.coroutines.flow.Flow
 class SearchCharacters(
     private val characterRepository: CharacterRepository
 ) {
-    operator fun invoke(searchQuery: String, sources: List<String>): Flow<PagingData<Character>> {
+    operator fun invoke(searchQuery: String): Flow<PagingData<Character>> {
         return characterRepository.searchCharacter(
-            searchQuery = searchQuery,
-            sources = sources
+            searchQuery = searchQuery
         )
     }
 }

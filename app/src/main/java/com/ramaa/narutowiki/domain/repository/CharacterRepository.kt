@@ -8,5 +8,5 @@ interface CharacterRepository {
 
     fun getCharacter(): Flow<PagingData<Character>>
 
-    fun searchCharacter(searchQuery: String, sources: List<String>): Flow<PagingData<Character>>
+    fun searchCharacter(searchQuery: String): Flow<PagingData<Character>>
 }

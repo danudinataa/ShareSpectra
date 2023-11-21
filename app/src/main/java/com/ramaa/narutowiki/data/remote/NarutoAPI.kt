@@ -6,16 +6,15 @@ import retrofit2.http.Query
 
 interface NarutoAPI {
 
-    @GET("characters")
+    @GET("character")
     suspend fun getCharacters(
         @Query("page") page: Int,
 
     ): CharactersResponse
 
-    @GET("characters")
+    @GET("character/search")
     suspend fun searchCharacter(
-        @Query("q") searchQuery: String,
-        @Query("sources") sources: String,
+        @Query("name") searchQuery: String,
         @Query("page") page: Int,
     ): CharactersResponse
 }

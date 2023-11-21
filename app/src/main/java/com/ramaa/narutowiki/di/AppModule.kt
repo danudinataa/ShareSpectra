@@ -53,7 +53,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNewsRepository(
+    fun provideCharactersRepository(
         narutoApi: NarutoAPI
     ): CharacterRepository {
         return CharacterRepositoryImpl(narutoApi)
@@ -61,7 +61,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideNewsUseCases(
+    fun provideCharactersUseCases(
         characterRepository: CharacterRepository
     ): CharacterUseCases {
         return CharacterUseCases(

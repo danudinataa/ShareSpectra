@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.ramaa.narutowiki.data.remote.CharacterPagingSource
 import com.ramaa.narutowiki.data.remote.NarutoAPI
-import com.ramaa.narutowiki.data.remote.response.SearchCharacterPagingSource
+import com.ramaa.narutowiki.data.remote.SearchPagingSource
 import com.ramaa.narutowiki.domain.model.Character
 import com.ramaa.narutowiki.domain.repository.CharacterRepository
 import kotlinx.coroutines.flow.Flow
@@ -21,18 +21,15 @@ class CharacterRepositoryImpl(private val narutoAPI: NarutoAPI): CharacterReposi
         ).flow
     }
 
-    override fun searchCharacter(searchQuery: String, sources: List<String>): Flow<PagingData<Character>> {
+    override fun searchCharacter(searchQuery: String): Flow<PagingData<Character>> {
         return Pager(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = {
-                SearchCharacterPagingSource(
+                SearchPagingSource(
                     api = narutoAPI,
-                    searchQuery = searchQuery,
-                    sources = sources.joinToString(separator = ",")
+                    searchQuery = searchQuery
                 )
             }
         ).flow
     }
-
-
 }

@@ -29,6 +29,7 @@ import coil.request.ImageRequest
 import com.ramaa.narutowiki.R
 import com.ramaa.narutowiki.domain.model.Character
 import com.ramaa.narutowiki.ui.theme.NarutoWikiTheme
+import com.ramaa.narutowiki.util.Constants.IMAGE_NOT_FOUND
 import com.ramaa.narutowiki.util.Dimens.CharacterCardSize
 import com.ramaa.narutowiki.util.Dimens.ExtraSmallPadding
 import com.ramaa.narutowiki.util.Dimens.ExtraSmallPadding2
@@ -50,7 +51,9 @@ fun CharacterCard(
             modifier = Modifier
                 .size(CharacterCardSize)
                 .clip(MaterialTheme.shapes.medium),
-            model = ImageRequest.Builder(context).data(character.images[0]).build(),
+            model = ImageRequest.Builder(context).data(
+                character.images?.firstOrNull() ?: IMAGE_NOT_FOUND
+            ).build(),
             contentDescription = null,
             contentScale = ContentScale.Crop
         )
@@ -71,7 +74,7 @@ fun CharacterCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = character.jutsu[0],
+                    text = character.jutsu?.firstOrNull() ?: "Unknown",
                     style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
                     color = colorResource(id = R.color.body)
                 )
@@ -84,7 +87,7 @@ fun CharacterCard(
                 )
                 Spacer(modifier = Modifier.width(ExtraSmallPadding))
                 Text(
-                    text = character.natureType?.get(0) ?: "none",
+                    text = character.natureType?.firstOrNull() ?: "Unknown",
                     style = MaterialTheme.typography.labelSmall,
                     color = colorResource(id = R.color.body)
                 )
@@ -107,7 +110,8 @@ fun ArticleCardPreview() {
                 images = listOf(
                     "https://static.wikia.nocookie.net/naruto/images/d/d6/Naruto_Part_I.png",
                     "https://static.wikia.nocookie.net/naruto/images/7/7d/Naruto_Part_II.png"
-                )
+                ),
+                uniqueTraits = listOf("BLABLABLABALBA")
             )
         )
     }

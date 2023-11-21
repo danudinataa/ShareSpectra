@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import com.ramaa.narutowiki.navigation.AppNavigator
 import com.ramaa.narutowiki.presentation.onboarding.OnBoardingScreen
 import com.ramaa.narutowiki.viewmodel.OnBoardingViewModel
 
@@ -28,19 +29,10 @@ fun NavGraph(
 
         navigation(
             route = Route.AppNavigation.route,
-            startDestination = Route.HomeScreen.route
+            startDestination = Route.AppNavigatorScreen.route
         ) {
-            composable(route = Route.HomeScreen.route) {
-
-            }
-            composable(route = Route.SearchScreen.route) {
-
-            }
-            composable(route = Route.BookmarkScreen.route) {
-
-            }
-            composable(route = Route.DetailsScreen.route) {
-
+            composable(route = Route.AppNavigatorScreen.route){
+                AppNavigator()
             }
         }
     }

@@ -1,6 +1,7 @@
     package com.ramaa.narutowiki.presentation.common
 
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -49,6 +50,7 @@ fun SearchBar(
     LaunchedEffect(key1 = isClicked){
         if(isClicked){
             onClick?.invoke()
+            Log.d("SearchBar", "Clicked!")
         }
     }
 

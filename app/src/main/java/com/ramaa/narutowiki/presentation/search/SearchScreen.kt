@@ -38,8 +38,8 @@ fun SearchScreen(
             val characters = it.collectAsLazyPagingItems()
             CharacterList(
                 characters = characters,
-                onClick = {
-                    navigateToDetails
+                onClick = { character ->
+                    navigateToDetails(character)
                 }
             )
         }

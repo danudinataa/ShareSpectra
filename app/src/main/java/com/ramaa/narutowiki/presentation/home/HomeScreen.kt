@@ -18,12 +18,13 @@ import com.ramaa.narutowiki.R
 import com.ramaa.narutowiki.domain.model.ItemCharacter
 import com.ramaa.narutowiki.presentation.common.CharacterList
 import com.ramaa.narutowiki.presentation.common.SearchBar
+import com.ramaa.narutowiki.presentation.navgraph.Route
 import com.ramaa.narutowiki.util.Dimens.Padding1
 
 @Composable
 fun HomeScreen(
     characters: LazyPagingItems<ItemCharacter>,
-    navigateToSearch:() -> Unit,
+    navigateToSearch:(String) -> Unit,
     navigateToDetails: (ItemCharacter) -> Unit
 ) {
 
@@ -52,7 +53,7 @@ fun HomeScreen(
             readOnly = true,
             onValueChange = {},
             onSearch = {},
-            onClick = { navigateToSearch }
+            onClick = { navigateToSearch(Route.SearchScreen.route) }
         )
 
         Spacer(modifier = Modifier.height(Padding1))

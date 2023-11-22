@@ -34,6 +34,7 @@ import com.ramaa.narutowiki.util.Dimens.CharacterCardSize
 import com.ramaa.narutowiki.util.Dimens.ExtraSmallPadding
 import com.ramaa.narutowiki.util.Dimens.ExtraSmallPadding2
 import com.ramaa.narutowiki.util.Dimens.SmallIconSize
+import com.ramaa.narutowiki.util.Dimens.SmallPadding1
 
 @Composable
 fun CharacterCard(
@@ -57,6 +58,7 @@ fun CharacterCard(
             contentDescription = null,
             contentScale = ContentScale.Crop
         )
+        Spacer(modifier = Modifier.padding(SmallPadding1))
         Column(
             verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
@@ -73,6 +75,13 @@ fun CharacterCard(
             Row(
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_jutsu_icon),
+                    contentDescription = null,
+                    modifier = Modifier.size(SmallIconSize),
+                    tint = colorResource(id = R.color.body)
+                )
+                Spacer(modifier = Modifier.width(ExtraSmallPadding))
                 Text(
                     text = itemCharacter.jutsu?.firstOrNull() ?: "Unknown",
                     style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),

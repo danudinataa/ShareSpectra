@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.ramaa.narutowiki.R
@@ -40,13 +41,13 @@ fun OnBoardingPage(
         Spacer(modifier = Modifier.height(Padding1))
         Text(
             modifier = Modifier.padding(horizontal = Padding2),
-            text = page.title,
+            text = stringResource(id = page.title),
             style = MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold),
             color = colorResource(id = R.color.display_small)
         )
         Text(
             modifier = Modifier.padding(horizontal = Padding2),
-            text = page.description,
+            text = stringResource(id = page.description),
             style = MaterialTheme.typography.bodyMedium,
             color = colorResource(id = R.color.text_medium)
         )
@@ -60,8 +61,8 @@ fun OnBoardingPagePreview() {
     NarutoWikiTheme {
         OnBoardingPage(
             page = Page(
-                title = "Lorem Ipsum is simply dummy",
-                description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                title = R.string.title_page1,
+                description = R.string.desc_page1,
                 image = R.drawable.onboarding1
             )
         )

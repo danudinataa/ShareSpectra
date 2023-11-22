@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Naruto Wiki</string>
     <string name="about_me">Hi! Nice to meet you!\n It\'s Ramaa here, your friendly developer! 🙌🏻</string>
+    <string name="title_page1">More than 100 Naruto characters!</string>
+    <string name="desc_page1">You can see more than 1000 characters in the Naruto anime series.</string>
+    <string name="title_page2">Search your favorite characters!</string>
+    <string name="desc_page2">You can search for the characters you want with the search feature.</string>
+    <string name="title_page3">Add favorite characters to bookmarks</string>
+    <string name="desc_page3">You can add your favorite characters with the bookmark feature.</string>
 </resources>

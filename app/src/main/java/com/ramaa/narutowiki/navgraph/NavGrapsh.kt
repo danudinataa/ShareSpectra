@@ -1,4 +1,4 @@
-package com.ramaa.narutowiki.presentation.navgraph
+package com.ramaa.narutowiki.navgraph
 
 import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import com.ramaa.narutowiki.navigation.AppNavigator
+import com.ramaa.narutowiki.presentation.navigation.AppNavigator
 import com.ramaa.narutowiki.presentation.onboarding.OnBoardingScreen
 import com.ramaa.narutowiki.viewmodel.OnBoardingViewModel
 

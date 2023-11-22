@@ -1,4 +1,4 @@
-package com.ramaa.narutowiki.presentation.navgraph
+package com.ramaa.narutowiki.navgraph
 
 sealed class Route(
     val route: String

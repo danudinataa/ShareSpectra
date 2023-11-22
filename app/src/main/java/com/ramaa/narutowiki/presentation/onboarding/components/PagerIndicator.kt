@@ -6,12 +6,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import com.ramaa.narutowiki.ui.theme.BrownWenge
+import com.ramaa.narutowiki.ui.theme.LightOrange
+import com.ramaa.narutowiki.ui.theme.SoftOrange
 import com.ramaa.narutowiki.util.Dimens.IndicatorSize
 
 @Composable
@@ -19,8 +19,8 @@ fun PagerIndicator(
     modifier: Modifier = Modifier,
     pagesSize: Int,
     selectedPage: Int,
-    selectedColor: Color = MaterialTheme.colorScheme.primary,
-    unselectedColor: Color = BrownWenge,
+    selectedColor: Color = LightOrange,
+    unselectedColor: Color = SoftOrange,
 ) {
     Row(modifier = modifier, horizontalArrangement = Arrangement.SpaceBetween) {
         repeat(times = pagesSize) { page ->

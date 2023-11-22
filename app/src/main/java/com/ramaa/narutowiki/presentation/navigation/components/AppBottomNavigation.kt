@@ -1,4 +1,4 @@
-package com.ramaa.narutowiki.navigation.components
+package com.ramaa.narutowiki.presentation.navigation.components
 
 import android.content.res.Configuration
 import androidx.annotation.DrawableRes

@@ -27,7 +27,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
@@ -37,6 +36,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ramaa.narutowiki.R
+import com.ramaa.narutowiki.ui.theme.LightOrange
+import com.ramaa.narutowiki.ui.theme.SoftOrange
 
 @Composable
 fun ProfileScreen() {
@@ -59,7 +60,7 @@ fun ProfileScreen() {
             modifier = Modifier
                 .clip(CircleShape)
                 .size(200.dp)
-                .border(2.dp, Color.Gray, CircleShape)
+                .border(2.dp, LightOrange, CircleShape)
         )
 
         Text (
@@ -99,7 +100,7 @@ fun ProfileScreen() {
                 .padding(horizontal = 32.dp, vertical = 12.dp)
                 .height(48.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(id = R.color.shimmer)
+                containerColor = MaterialTheme.colorScheme.onPrimaryContainer
             ),
             shape = RoundedCornerShape(20)
         ) {
@@ -125,7 +126,7 @@ fun ProfileScreen() {
                 Text (
                     text = "My LinkedIn",
                     style = MaterialTheme.typography.labelMedium,
-                    color = colorResource(id = R.color.text_medium),
+                    color = colorResource(id = R.color.text_title),
                 )
             }
         }
@@ -145,7 +146,7 @@ fun ProfileScreen() {
                 .padding(horizontal = 32.dp, vertical = 12.dp)
                 .height(48.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(id = R.color.shimmer)
+                containerColor = MaterialTheme.colorScheme.onPrimaryContainer
             ),
             shape = RoundedCornerShape(20)
         ) {
@@ -171,7 +172,7 @@ fun ProfileScreen() {
                 Text (
                     text = "My Instagram",
                     style = MaterialTheme.typography.labelMedium,
-                    color = colorResource(id = R.color.text_medium),
+                    color = colorResource(id = R.color.text_title),
                 )
             }
         }

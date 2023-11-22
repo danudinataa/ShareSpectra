@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ramaa.narutowiki.domain.usecases.entry.ReadAppEntry
-import com.ramaa.narutowiki.presentation.navgraph.Route
+import com.ramaa.narutowiki.navgraph.Route
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn

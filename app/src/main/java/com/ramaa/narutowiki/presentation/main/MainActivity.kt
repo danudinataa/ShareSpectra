@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.ramaa.narutowiki.presentation.navgraph.NavGraph
+import com.ramaa.narutowiki.navgraph.NavGraph
 import com.ramaa.narutowiki.ui.theme.NarutoWikiTheme
 import com.ramaa.narutowiki.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint

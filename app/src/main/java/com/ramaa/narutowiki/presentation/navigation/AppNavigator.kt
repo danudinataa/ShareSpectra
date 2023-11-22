@@ -1,4 +1,4 @@
-package com.ramaa.narutowiki.navigation
+package com.ramaa.narutowiki.presentation.navigation
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,12 +21,12 @@ import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.ramaa.narutowiki.R
 import com.ramaa.narutowiki.domain.model.ItemCharacter
-import com.ramaa.narutowiki.navigation.components.AppBottomNavigation
-import com.ramaa.narutowiki.navigation.components.BottomNavigationItem
+import com.ramaa.narutowiki.presentation.navigation.components.AppBottomNavigation
+import com.ramaa.narutowiki.presentation.navigation.components.BottomNavigationItem
 import com.ramaa.narutowiki.presentation.bookmark.BookmarkScreen
 import com.ramaa.narutowiki.presentation.detail.DetailsScreen
 import com.ramaa.narutowiki.presentation.home.HomeScreen
-import com.ramaa.narutowiki.presentation.navgraph.Route
+import com.ramaa.narutowiki.navgraph.Route
 import com.ramaa.narutowiki.presentation.profile.ProfileScreen
 import com.ramaa.narutowiki.presentation.search.SearchScreen
 import com.ramaa.narutowiki.viewmodel.BookmarkViewModel
@@ -57,6 +57,7 @@ fun AppNavigator() {
         Route.HomeScreen.route -> 0
         Route.SearchScreen.route -> 1
         Route.BookmarkScreen.route -> 2
+        Route.ProfileScreen.route -> 3
         else -> 0
     }
 

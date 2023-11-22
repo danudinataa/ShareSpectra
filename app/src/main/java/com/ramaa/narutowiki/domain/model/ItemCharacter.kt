@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 
 @Entity
 @Parcelize
-data class Character(
+data class ItemCharacter(
 
     @field:SerializedName("images")
     val images: List<String>?,

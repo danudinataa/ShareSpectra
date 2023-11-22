@@ -1,7 +1,7 @@
 package com.ramaa.narutowiki.presentation.bookmark
 
-import com.ramaa.narutowiki.domain.model.Character
+import com.ramaa.narutowiki.domain.model.ItemCharacter
 
 data class BookmarkState(
-    val characters: List<Character> = emptyList()
+    val itemCharacters: List<ItemCharacter> = emptyList()
 )

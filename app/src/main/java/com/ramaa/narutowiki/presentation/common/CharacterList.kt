@@ -19,10 +19,10 @@ import com.ramaa.narutowiki.util.Dimens.Padding1
 @Composable
 fun CharacterList(
     modifier: Modifier = Modifier,
-    characters: List<Character>,
-    onClick: (Character) -> Unit
+    itemCharacters: List<ItemCharacter>,
+    onClick: (ItemCharacter) -> Unit
 ) {
-    if (characters.isEmpty()){
+    if (itemCharacters.isEmpty()){
         EmptyScreen()
     }
     LazyColumn(
@@ -31,10 +31,10 @@ fun CharacterList(
         contentPadding = PaddingValues(all = ExtraSmallPadding2)
     ) {
         items(
-            count = characters.size,
+            count = itemCharacters.size,
         ) {
-            characters[it]?.let { character ->
-                CharacterCard(character = character, onClick = { onClick(character) })
+            itemCharacters[it]?.let { character ->
+                CharacterCard(itemCharacter = character, onClick = { onClick(character) })
             }
         }
     }
@@ -43,8 +43,8 @@ fun CharacterList(
 @Composable
 fun CharacterList(
     modifier: Modifier = Modifier,
-    characters: LazyPagingItems<Character>,
-    onClick:(Character) -> Unit
+    characters: LazyPagingItems<ItemCharacter>,
+    onClick:(ItemCharacter) -> Unit
 ) {
 
     val handlePagingResult = handlePagingResult(characters)
@@ -59,7 +59,7 @@ fun CharacterList(
                 count = characters.itemCount,
             ) {
                 characters[it]?.let { character ->
-                    CharacterCard(character = character, onClick = {onClick(character)})
+                    CharacterCard(itemCharacter = character, onClick = {onClick(character)})
                 }
             }
         }
@@ -67,7 +67,7 @@ fun CharacterList(
 }
 
 @Composable
-fun handlePagingResult(articles: LazyPagingItems<Character>): Boolean {
+fun handlePagingResult(articles: LazyPagingItems<ItemCharacter>): Boolean {
     val loadState = articles.loadState
     val error = when {
         loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error

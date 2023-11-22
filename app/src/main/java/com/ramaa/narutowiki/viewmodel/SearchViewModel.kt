@@ -36,6 +36,6 @@ class SearchViewModel @Inject constructor(
         val characters = searchUseCases(
             searchQuery = _state.value.searchQuery
         ).cachedIn(viewModelScope)
-        _state.value = _state.value.copy(articles = characters)
+        _state.value = _state.value.copy(characters = characters)
     }
 }

@@ -13,14 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import com.ramaa.narutowiki.R
-import com.ramaa.narutowiki.domain.model.Character
+import com.ramaa.narutowiki.domain.model.ItemCharacter
 import com.ramaa.narutowiki.presentation.common.CharacterList
 import com.ramaa.narutowiki.util.Dimens.Padding1
 
 @Composable
 fun BookmarkScreen(
     state: BookmarkState,
-    navigateToDetails: (Character) -> Unit
+    navigateToDetails: (ItemCharacter) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -40,7 +40,7 @@ fun BookmarkScreen(
         Spacer(modifier = Modifier.height(Padding1))
 
         CharacterList(
-            characters = state.characters,
+            itemCharacters = state.itemCharacters,
             onClick = navigateToDetails
         )
     }

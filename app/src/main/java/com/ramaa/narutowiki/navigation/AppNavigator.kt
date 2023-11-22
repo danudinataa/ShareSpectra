@@ -20,7 +20,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.ramaa.narutowiki.R
-import com.ramaa.narutowiki.domain.model.Character
+import com.ramaa.narutowiki.domain.model.ItemCharacter
 import com.ramaa.narutowiki.navigation.components.AppBottomNavigation
 import com.ramaa.narutowiki.navigation.components.BottomNavigationItem
 import com.ramaa.narutowiki.presentation.bookmark.BookmarkScreen
@@ -111,7 +111,7 @@ fun AppNavigator() {
                     navigateToDetails = { char ->
                         navigateToDetails(
                             navController = navController,
-                            character = char
+                            itemCharacter = char
                         )
                     }
                 )
@@ -126,17 +126,17 @@ fun AppNavigator() {
                     navigateToDetails = { character ->
                         navigateToDetails(
                             navController = navController,
-                            character = character
+                            itemCharacter = character
                         )
                     }
                 )
             }
             composable(route = Route.DetailsScreen.route) {
                 val viewModel: DetailViewModel = hiltViewModel()
-                navController.previousBackStackEntry?.savedStateHandle?.get<Character?>("character")
+                navController.previousBackStackEntry?.savedStateHandle?.get<ItemCharacter?>("character")
                     ?.let { character ->
                         DetailsScreen(
-                            character = character,
+                            itemCharacter = character,
                             event = viewModel::onEvent,
                             navigateUp = { navController.navigateUp() },
                             sideEffect = viewModel.sideEffect
@@ -153,7 +153,7 @@ fun AppNavigator() {
                     navigateToDetails = { character ->
                         navigateToDetails(
                             navController = navController,
-                            character = character
+                            itemCharacter = character
                         )
                     }
                 )
@@ -174,8 +174,8 @@ private fun navigateToTab(navController: NavController, route: String) {
     }
 }
 
-private fun navigateToDetails(navController: NavController, character: Character){
-    navController.currentBackStackEntry?.savedStateHandle?.set("character", character)
+private fun navigateToDetails(navController: NavController, itemCharacter: ItemCharacter){
+    navController.currentBackStackEntry?.savedStateHandle?.set("character", itemCharacter)
     navController.navigate(
         route = Route.DetailsScreen.route
     )

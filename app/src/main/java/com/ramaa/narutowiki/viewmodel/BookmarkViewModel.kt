@@ -4,7 +4,6 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ramaa.narutowiki.domain.usecases.characters.GetSavedCharacter
 import com.ramaa.narutowiki.domain.usecases.characters.GetSavedCharacters
 import com.ramaa.narutowiki.presentation.bookmark.BookmarkState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,7 +25,7 @@ class BookmarkViewModel @Inject constructor(
 
     private fun getCharacters() {
         getSavedCharacterUseCase().onEach {
-            _state.value = _state.value.copy(characters = it)
+            _state.value = _state.value.copy(itemCharacters = it)
         }.launchIn(viewModelScope)
     }
 }

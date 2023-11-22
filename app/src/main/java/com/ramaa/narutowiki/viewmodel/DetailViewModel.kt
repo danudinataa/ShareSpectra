@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ramaa.narutowiki.domain.model.Character
+import com.ramaa.narutowiki.domain.model.ItemCharacter
 import com.ramaa.narutowiki.domain.usecases.characters.DeleteCharacter
 import com.ramaa.narutowiki.domain.usecases.characters.GetSavedCharacter
 import com.ramaa.narutowiki.domain.usecases.characters.UpsertCharacter
@@ -29,11 +29,11 @@ class DetailViewModel @Inject constructor(
         when (event) {
             is DetailsEvent.UpsertDeleteCharacter -> {
                 viewModelScope.launch {
-                    val article = getSavedCharacterUseCase(id = event.character.id)
+                    val article = getSavedCharacterUseCase(id = event.itemCharacter.id)
                     if (article == null){
-                        upsertCharacter(character = event.character)
+                        upsertCharacter(itemCharacter = event.itemCharacter)
                     }else{
-                        deleteCharacter(character = event.character)
+                        deleteCharacter(itemCharacter = event.itemCharacter)
                     }
                 }
             }
@@ -43,13 +43,13 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    private suspend fun deleteCharacter(character: Character) {
-        deleteCharacterUseCase(character = character)
+    private suspend fun deleteCharacter(itemCharacter: ItemCharacter) {
+        deleteCharacterUseCase(itemCharacter = itemCharacter)
         sideEffect = UIComponent.Toast("Character Deleted from Bookmark!")
     }
 
-    private suspend fun upsertCharacter(character: Character) {
-        upsertCharacterUseCase(character = character)
+    private suspend fun upsertCharacter(itemCharacter: ItemCharacter) {
+        upsertCharacterUseCase(itemCharacter = itemCharacter)
         sideEffect = UIComponent.Toast("Character Added to Bookmark!")
     }
 

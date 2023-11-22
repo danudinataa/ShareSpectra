@@ -1,20 +1,20 @@
 package com.ramaa.narutowiki.domain.repository
 
 import androidx.paging.PagingData
-import com.ramaa.narutowiki.domain.model.Character
+import com.ramaa.narutowiki.domain.model.ItemCharacter
 import kotlinx.coroutines.flow.Flow
 
 interface CharacterRepository {
 
-    fun getCharacter(): Flow<PagingData<Character>>
+    fun getCharacter(): Flow<PagingData<ItemCharacter>>
 
-    fun searchCharacter(searchQuery: String): Flow<PagingData<Character>>
+    fun searchCharacter(searchQuery: String): Flow<PagingData<ItemCharacter>>
 
-    suspend fun upsertCharacter(character: Character)
+    suspend fun upsertCharacter(itemCharacter: ItemCharacter)
 
-    suspend fun deleteCharacter(character: Character)
+    suspend fun deleteCharacter(itemCharacter: ItemCharacter)
 
-    fun getCharacters(): Flow<List<Character>>
+    fun getCharacters(): Flow<List<ItemCharacter>>
 
-    suspend fun getCharacter(id: Int): Character?
+    suspend fun getCharacter(id: Int): ItemCharacter?
 }

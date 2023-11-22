@@ -1,6 +1,5 @@
 package com.ramaa.narutowiki.presentation.home
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,16 +15,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import com.ramaa.narutowiki.R
-import com.ramaa.narutowiki.domain.model.Character
+import com.ramaa.narutowiki.domain.model.ItemCharacter
 import com.ramaa.narutowiki.presentation.common.CharacterList
 import com.ramaa.narutowiki.presentation.common.SearchBar
 import com.ramaa.narutowiki.util.Dimens.Padding1
 
 @Composable
 fun HomeScreen(
-    characters: LazyPagingItems<Character>,
+    characters: LazyPagingItems<ItemCharacter>,
     navigateToSearch:() -> Unit,
-    navigateToDetails: (Character) -> Unit
+    navigateToDetails: (ItemCharacter) -> Unit
 ) {
 
     Column(

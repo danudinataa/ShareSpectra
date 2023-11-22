@@ -3,13 +3,13 @@ package com.ramaa.narutowiki.data.remote.response
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
-import com.ramaa.narutowiki.domain.model.Character
+import com.ramaa.narutowiki.domain.model.ItemCharacter
 
 @Parcelize
 data class CharactersResponse(
 
 	@field:SerializedName("characters")
-	val characters: List<Character>,
+	val itemCharacters: List<ItemCharacter>,
 
 	@field:SerializedName("total")
 	val total: Int,

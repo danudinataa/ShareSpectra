@@ -27,7 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.ramaa.narutowiki.R
-import com.ramaa.narutowiki.domain.model.Character
+import com.ramaa.narutowiki.domain.model.ItemCharacter
 import com.ramaa.narutowiki.ui.theme.NarutoWikiTheme
 import com.ramaa.narutowiki.util.Constants.IMAGE_NOT_FOUND
 import com.ramaa.narutowiki.util.Dimens.CharacterCardSize
@@ -38,7 +38,7 @@ import com.ramaa.narutowiki.util.Dimens.SmallIconSize
 @Composable
 fun CharacterCard(
     modifier: Modifier = Modifier,
-    character: Character,
+    itemCharacter: ItemCharacter,
     onClick: (() -> Unit)? = null
 ) {
 
@@ -52,7 +52,7 @@ fun CharacterCard(
                 .size(CharacterCardSize)
                 .clip(MaterialTheme.shapes.medium),
             model = ImageRequest.Builder(context).data(
-                character.images?.firstOrNull() ?: IMAGE_NOT_FOUND
+                itemCharacter.images?.firstOrNull() ?: IMAGE_NOT_FOUND
             ).build(),
             contentDescription = null,
             contentScale = ContentScale.Crop
@@ -64,7 +64,7 @@ fun CharacterCard(
                 .height(CharacterCardSize)
         ) {
             Text(
-                text = character.name,
+                text = itemCharacter.name,
                 style = MaterialTheme.typography.bodyMedium.copy(),
                 color = colorResource(id = R.color.text_title),
                 maxLines = 2,
@@ -74,7 +74,7 @@ fun CharacterCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = character.jutsu?.firstOrNull() ?: "Unknown",
+                    text = itemCharacter.jutsu?.firstOrNull() ?: "Unknown",
                     style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
                     color = colorResource(id = R.color.body)
                 )
@@ -87,7 +87,7 @@ fun CharacterCard(
                 )
                 Spacer(modifier = Modifier.width(ExtraSmallPadding))
                 Text(
-                    text = character.natureType?.firstOrNull() ?: "Unknown",
+                    text = itemCharacter.natureType?.firstOrNull() ?: "Unknown",
                     style = MaterialTheme.typography.labelSmall,
                     color = colorResource(id = R.color.body)
                 )
@@ -102,7 +102,7 @@ fun CharacterCard(
 fun ArticleCardPreview() {
     NarutoWikiTheme(dynamicColor = false) {
         CharacterCard(
-            character = Character(
+            itemCharacter = ItemCharacter(
                 name = "Naruto",
                 jutsu = listOf("Rasengan", "Rasen Shuriken"),
                 natureType = listOf("Wind", "Yin"),

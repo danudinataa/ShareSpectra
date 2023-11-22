@@ -29,7 +29,7 @@ import androidx.compose.ui.text.font.FontWeight
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.ramaa.narutowiki.R
-import com.ramaa.narutowiki.domain.model.Character
+import com.ramaa.narutowiki.domain.model.ItemCharacter
 import com.ramaa.narutowiki.presentation.detail.components.DetailsTopBar
 import com.ramaa.narutowiki.util.Constants
 import com.ramaa.narutowiki.util.Dimens
@@ -41,7 +41,7 @@ import com.ramaa.narutowiki.util.UIComponent
 
 @Composable
 fun DetailsScreen(
-    character: Character,
+    itemCharacter: ItemCharacter,
     event: (DetailsEvent) -> Unit,
     navigateUp: () -> Unit,
     sideEffect: UIComponent?
@@ -63,7 +63,7 @@ fun DetailsScreen(
         .statusBarsPadding()) {
         DetailsTopBar(
             onBookmarkClick = {
-                event(DetailsEvent.UpsertDeleteCharacter(character))
+                event(DetailsEvent.UpsertDeleteCharacter(itemCharacter))
             },
             onBackClick = navigateUp
         )
@@ -79,7 +79,7 @@ fun DetailsScreen(
             item {
                 AsyncImage(
                     model = ImageRequest.Builder(context = context).data(
-                        character.images?.firstOrNull() ?: Constants.IMAGE_NOT_FOUND
+                        itemCharacter.images?.firstOrNull() ?: Constants.IMAGE_NOT_FOUND
                     )
                         .build(),
                     contentDescription = null,
@@ -91,7 +91,7 @@ fun DetailsScreen(
                 )
                 Spacer(modifier = Modifier.height(Padding1))
                 Text(
-                    text = character.name,
+                    text = itemCharacter.name,
                     style = MaterialTheme.typography.titleLarge,
                     color = colorResource(
                         id = R.color.text_title
@@ -117,7 +117,7 @@ fun DetailsScreen(
                 }
                 Spacer(modifier = Modifier.height(SmallPadding1))
                 
-                character.jutsu?.forEachIndexed { index, item ->
+                itemCharacter.jutsu?.forEachIndexed { index, item ->
                     Text(
                         text = "${index + 1}. $item",
                         style = MaterialTheme.typography.labelMedium,
@@ -145,7 +145,7 @@ fun DetailsScreen(
                 }
                 Spacer(modifier = Modifier.height(SmallPadding1))
                 
-                character.natureType?.forEachIndexed { index, item ->
+                itemCharacter.natureType?.forEachIndexed { index, item ->
                     Text(
                         text = "${index + 1}. $item",
                         style = MaterialTheme.typography.labelMedium,

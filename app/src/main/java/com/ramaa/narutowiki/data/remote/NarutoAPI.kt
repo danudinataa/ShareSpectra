@@ -1,6 +1,7 @@
 package com.ramaa.narutowiki.data.remote
 
 import com.ramaa.narutowiki.data.remote.response.CharactersResponse
+import com.ramaa.narutowiki.domain.model.ItemCharacter
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -16,5 +17,5 @@ interface NarutoAPI {
     suspend fun searchCharacter(
         @Query("name") searchQuery: String,
         @Query("page") page: Int,
-    ): CharactersResponse
+    ): ItemCharacter
 }

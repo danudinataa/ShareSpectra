@@ -69,6 +69,7 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
 
     // splash screen
     implementation("androidx.core:core-splashscreen:1.0.1")
@@ -105,6 +106,9 @@ dependencies {
     // paging 3
     implementation("androidx.paging:paging-runtime-ktx:3.2.1")
     implementation("androidx.paging:paging-compose:3.3.0-alpha02")
+
+    // coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 }
 
 kapt {

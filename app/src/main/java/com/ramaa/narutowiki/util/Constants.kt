@@ -8,4 +8,6 @@ object Constants {
     const val BASE_URL = "https://narutodb.xyz/api/"
 
     const val IMAGE_NOT_FOUND = "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
+
+    const val DATABASE_NAME = "characters_db"
 }

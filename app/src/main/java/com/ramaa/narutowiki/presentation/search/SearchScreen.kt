@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.ramaa.narutowiki.domain.model.Character
 import com.ramaa.narutowiki.presentation.common.CharacterList
 import com.ramaa.narutowiki.presentation.common.SearchBar
 import com.ramaa.narutowiki.util.Dimens.Padding1
@@ -15,7 +16,8 @@ import com.ramaa.narutowiki.util.Dimens.Padding1
 @Composable
 fun SearchScreen(
     state: SearchState,
-    event:(SearchEvent) -> Unit
+    event:(SearchEvent) -> Unit,
+    navigateToDetails: (Character) -> Unit
 ) {
 
     Column(
@@ -37,7 +39,7 @@ fun SearchScreen(
             CharacterList(
                 characters = characters,
                 onClick = {
-                    //TODO: Navigate to details screen
+                    navigateToDetails
                 }
             )
         }

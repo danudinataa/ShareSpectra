@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.ramaa.narutowiki.domain.usecases.characters.CharacterUseCases
+import com.ramaa.narutowiki.domain.usecases.characters.SearchCharacters
 import com.ramaa.narutowiki.presentation.search.SearchEvent
 import com.ramaa.narutowiki.presentation.search.SearchState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val characterUseCases: CharacterUseCases
+    private val searchUseCases: SearchCharacters
 ) : ViewModel() {
 
     private var _state = mutableStateOf(SearchState())
@@ -33,11 +33,9 @@ class SearchViewModel @Inject constructor(
     }
 
     private fun searchCharacters() {
-        val characters = characterUseCases.searchCharacters(
+        val characters = searchUseCases(
             searchQuery = _state.value.searchQuery
         ).cachedIn(viewModelScope)
         _state.value = _state.value.copy(articles = characters)
     }
-
-
 }

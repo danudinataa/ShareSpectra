@@ -1,9 +1,12 @@
 package com.ramaa.narutowiki.domain.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
+@Entity
 @Parcelize
 data class Character(
 
@@ -17,7 +20,7 @@ data class Character(
     val name: String,
 
     @field:SerializedName("id")
-    val id: Int,
+    @PrimaryKey val id: Int,
 
     @field:SerializedName("natureType")
     val natureType: List<String>?,

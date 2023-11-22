@@ -1,10 +1,7 @@
 package com.ramaa.narutowiki.presentation.navgraph
 
-import androidx.navigation.NamedNavArgument
-
 sealed class Route(
-    val route: String,
-    val arguments: List<NamedNavArgument> = emptyList()
+    val route: String
 ) {
     object OnBoardingScreen : Route(route = "onBoardingScreen")
 
@@ -13,6 +10,8 @@ sealed class Route(
     object SearchScreen : Route(route = "searchScreen")
 
     object ProfileScreen : Route(route = "profileScreen")
+
+    object BookmarkScreen : Route(route = "bookmarkScreen")
 
     object DetailsScreen : Route(route = "detailsScreen")
 

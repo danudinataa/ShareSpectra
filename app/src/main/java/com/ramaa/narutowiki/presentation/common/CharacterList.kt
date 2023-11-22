@@ -15,6 +15,31 @@ import com.ramaa.narutowiki.presentation.home.components.CharacterCard
 import com.ramaa.narutowiki.util.Dimens.ExtraSmallPadding2
 import com.ramaa.narutowiki.util.Dimens.Padding1
 
+
+@Composable
+fun CharacterList(
+    modifier: Modifier = Modifier,
+    characters: List<Character>,
+    onClick: (Character) -> Unit
+) {
+    if (characters.isEmpty()){
+        EmptyScreen()
+    }
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(Padding1),
+        contentPadding = PaddingValues(all = ExtraSmallPadding2)
+    ) {
+        items(
+            count = characters.size,
+        ) {
+            characters[it]?.let { character ->
+                CharacterCard(character = character, onClick = { onClick(character) })
+            }
+        }
+    }
+}
+
 @Composable
 fun CharacterList(
     modifier: Modifier = Modifier,
@@ -23,7 +48,6 @@ fun CharacterList(
 ) {
 
     val handlePagingResult = handlePagingResult(characters)
-
 
     if (handlePagingResult) {
         LazyColumn(

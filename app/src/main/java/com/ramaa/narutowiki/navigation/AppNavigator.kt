@@ -23,10 +23,13 @@ import com.ramaa.narutowiki.R
 import com.ramaa.narutowiki.domain.model.Character
 import com.ramaa.narutowiki.navigation.components.AppBottomNavigation
 import com.ramaa.narutowiki.navigation.components.BottomNavigationItem
+import com.ramaa.narutowiki.presentation.bookmark.BookmarkScreen
 import com.ramaa.narutowiki.presentation.detail.DetailsScreen
 import com.ramaa.narutowiki.presentation.home.HomeScreen
 import com.ramaa.narutowiki.presentation.navgraph.Route
 import com.ramaa.narutowiki.presentation.search.SearchScreen
+import com.ramaa.narutowiki.viewmodel.BookmarkViewModel
+import com.ramaa.narutowiki.viewmodel.DetailViewModel
 import com.ramaa.narutowiki.viewmodel.HomeViewModel
 import com.ramaa.narutowiki.viewmodel.SearchViewModel
 
@@ -38,7 +41,8 @@ fun AppNavigator() {
         listOf(
             BottomNavigationItem(icon = R.drawable.baseline_home_24, text = "Home"),
             BottomNavigationItem(icon = R.drawable.baseline_search_24, text = "Search"),
-            BottomNavigationItem(icon = R.drawable.baseline_person_24, text = "Profile"),
+            BottomNavigationItem(icon = R.drawable.baseline_bookmarks_24, text = "Bookmark"),
+
         )
     }
 
@@ -47,36 +51,45 @@ fun AppNavigator() {
     var selectedItem by rememberSaveable {
         mutableIntStateOf(0)
     }
+
     selectedItem = when (backStackState?.destination?.route) {
         Route.HomeScreen.route -> 0
         Route.SearchScreen.route -> 1
-        Route.ProfileScreen.route -> 2
+        Route.BookmarkScreen.route -> 2
         else -> 0
     }
 
+    val isBottomBarVisible = remember(key1 = backStackState) {
+        backStackState?.destination?.route == Route.HomeScreen.route ||
+                backStackState?.destination?.route == Route.SearchScreen.route ||
+                backStackState?.destination?.route == Route.BookmarkScreen.route
+    }
+
     Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = {
-        AppBottomNavigation(
-            items = bottomNavigationItems,
-            selectedItem = selectedItem,
-            onItemClick = { index ->
-                when (index) {
-                    0 -> navigateToTab(
-                        navController = navController,
-                        route = Route.HomeScreen.route
-                    )
+        if (isBottomBarVisible) {
+            AppBottomNavigation(
+                items = bottomNavigationItems,
+                selectedItem = selectedItem,
+                onItemClick = { index ->
+                    when (index) {
+                        0 -> navigateToTab(
+                            navController = navController,
+                            route = Route.HomeScreen.route
+                        )
 
-                    1 -> navigateToTab(
-                        navController = navController,
-                        route = Route.SearchScreen.route
-                    )
+                        1 -> navigateToTab(
+                            navController = navController,
+                            route = Route.SearchScreen.route
+                        )
 
-                    2 -> navigateToTab(
-                        navController = navController,
-                        route = Route.ProfileScreen.route
-                    )
+                        2 -> navigateToTab(
+                            navController = navController,
+                            route = Route.BookmarkScreen.route
+                        )
+                    }
                 }
-            }
-        )
+            )
+        }
     }) {
         val bottomPadding = it.calculateBottomPadding()
         NavHost(
@@ -95,10 +108,10 @@ fun AppNavigator() {
                             route = Route.SearchScreen.route
                         )
                     },
-                    navigateToDetails = { character ->
+                    navigateToDetails = { char ->
                         navigateToDetails(
                             navController = navController,
-                            character = character
+                            character = char
                         )
                     }
                 )
@@ -107,21 +120,43 @@ fun AppNavigator() {
                 val viewModel: SearchViewModel = hiltViewModel()
                 val state = viewModel.state.value
                 OnBackClickStateSaver(navController = navController)
-                SearchScreen(state = state, event = viewModel::onEvent)
+                SearchScreen(
+                    state = state,
+                    event = viewModel::onEvent,
+                    navigateToDetails = { character ->
+                        navigateToDetails(
+                            navController = navController,
+                            character = character
+                        )
+                    }
+                )
             }
             composable(route = Route.DetailsScreen.route) {
+                val viewModel: DetailViewModel = hiltViewModel()
                 navController.previousBackStackEntry?.savedStateHandle?.get<Character?>("character")
                     ?.let { character ->
                         DetailsScreen(
                             character = character,
-                            event = {},
-                            navigateUp = { navController.navigateUp() }
+                            event = viewModel::onEvent,
+                            navigateUp = { navController.navigateUp() },
+                            sideEffect = viewModel.sideEffect
                         )
                     }
 
             }
-            composable(route = Route.ProfileScreen.route) {
-
+            composable(route = Route.BookmarkScreen.route) {
+                val viewModel: BookmarkViewModel = hiltViewModel()
+                val state = viewModel.state.value
+                OnBackClickStateSaver(navController = navController)
+                BookmarkScreen(
+                    state = state,
+                    navigateToDetails = { character ->
+                        navigateToDetails(
+                            navController = navController,
+                            character = character
+                        )
+                    }
+                )
             }
         }
     }

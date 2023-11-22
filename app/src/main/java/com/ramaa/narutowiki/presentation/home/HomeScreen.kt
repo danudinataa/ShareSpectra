@@ -21,7 +21,6 @@ import com.ramaa.narutowiki.presentation.common.CharacterList
 import com.ramaa.narutowiki.presentation.common.SearchBar
 import com.ramaa.narutowiki.util.Dimens.Padding1
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     characters: LazyPagingItems<Character>,

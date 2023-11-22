@@ -76,7 +76,7 @@ fun NewsBottomNavigationPreview() {
         AppBottomNavigation(items = listOf(
             BottomNavigationItem(icon = R.drawable.baseline_home_24, text = "Home"),
             BottomNavigationItem(icon = R.drawable.baseline_search_24, text = "Search"),
-            BottomNavigationItem(icon = R.drawable.baseline_person_24, text = "Profile"),
+            BottomNavigationItem(icon = R.drawable.baseline_bookmarks_24, text = "Bookmark"),
         ), selectedItem = 0, onItemClick = {})
     }
 }

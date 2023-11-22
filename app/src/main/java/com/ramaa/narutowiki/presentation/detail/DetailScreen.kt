@@ -1,5 +1,6 @@
 package com.ramaa.narutowiki.presentation.detail
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -16,6 +17,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,20 +37,33 @@ import com.ramaa.narutowiki.util.Dimens.CharacterImageHeight
 import com.ramaa.narutowiki.util.Dimens.Padding1
 import com.ramaa.narutowiki.util.Dimens.Padding2
 import com.ramaa.narutowiki.util.Dimens.SmallPadding1
+import com.ramaa.narutowiki.util.UIComponent
 
 @Composable
 fun DetailsScreen(
     character: Character,
     event: (DetailsEvent) -> Unit,
-    navigateUp: () -> Unit
+    navigateUp: () -> Unit,
+    sideEffect: UIComponent?
 ) {
     val context = LocalContext.current
+    LaunchedEffect(key1 = sideEffect) {
+        sideEffect?.let {
+            when(sideEffect){
+                is UIComponent.Toast ->{
+                    Toast.makeText(context, sideEffect.message, Toast.LENGTH_SHORT).show()
+                    event(DetailsEvent.RemoveSideEffect)
+                }
+            }
+        }
+    }
+
     Column(modifier = Modifier
         .fillMaxSize()
         .statusBarsPadding()) {
         DetailsTopBar(
-            onBookMarkClick = {
-                event(DetailsEvent.SaveCharacters)
+            onBookmarkClick = {
+                event(DetailsEvent.UpsertDeleteCharacter(character))
             },
             onBackClick = navigateUp
         )

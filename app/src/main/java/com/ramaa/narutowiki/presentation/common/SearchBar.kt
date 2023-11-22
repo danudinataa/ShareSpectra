@@ -1,4 +1,4 @@
-package com.ramaa.narutowiki.presentation.common
+    package com.ramaa.narutowiki.presentation.common
 
 import android.content.res.Configuration
 import androidx.compose.foundation.border

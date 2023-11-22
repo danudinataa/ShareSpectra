@@ -1,5 +1,6 @@
 package com.ramaa.narutowiki.data.manager
 
+import android.app.Application
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -11,19 +12,20 @@ import com.ramaa.narutowiki.util.Constants
 import com.ramaa.narutowiki.util.Constants.USER_SETTINGS
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class LocalUserManagerImpl(
-    private val context: Context
+class LocalUserManagerImpl @Inject constructor(
+    private val application: Application
 ) : LocalUserManager {
 
     override suspend fun saveAppEntry() {
-        context.dataStore.edit { settings ->
+        application.dataStore.edit { settings ->
             settings[PreferenceKeys.APP_ENTRY] = true
         }
     }
 
     override fun readAppEntry(): Flow<Boolean> {
-        return context.dataStore.data.map { preferences ->
+        return application.dataStore.data.map { preferences ->
             preferences[PreferenceKeys.APP_ENTRY] ?: false
         }
     }

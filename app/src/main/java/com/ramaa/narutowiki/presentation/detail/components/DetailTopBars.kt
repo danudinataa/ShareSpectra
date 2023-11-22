@@ -19,7 +19,7 @@ import com.ramaa.narutowiki.ui.theme.NarutoWikiTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsTopBar(
-    onBookMarkClick: () -> Unit,
+    onBookmarkClick: () -> Unit,
     onBackClick: () -> Unit,
 ) {
 
@@ -41,7 +41,7 @@ fun DetailsTopBar(
         },
         actions = {
 
-            IconButton(onClick = onBookMarkClick) {
+            IconButton(onClick = onBookmarkClick) {
                 Icon(
                     painter = painterResource(id = R.drawable.baseline_bookmark_24),
                     contentDescription = null
@@ -57,7 +57,7 @@ fun DetailsTopBar(
 fun DetailsTopBarPreview() {
     NarutoWikiTheme(dynamicColor = false) {
         DetailsTopBar(
-            onBookMarkClick = { /*TODO*/ }
+            onBookmarkClick = { /*TODO*/ }
         ) {
 
         }

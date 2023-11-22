@@ -71,7 +71,6 @@ fun CardShimmerEffect(modifier: Modifier = Modifier) {
                         .height(15.dp)
                         .shimmerEffect()
                 )
-
             }
         }
     }

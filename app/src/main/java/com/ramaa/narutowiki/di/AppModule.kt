@@ -1,18 +1,13 @@
 package com.ramaa.narutowiki.di
 
 import android.app.Application
-import com.ramaa.narutowiki.data.manager.LocalUserManagerImpl
+import androidx.room.Room
+import com.ramaa.narutowiki.data.local.CharacterConverter
+import com.ramaa.narutowiki.data.local.CharactersDao
+import com.ramaa.narutowiki.data.local.CharactersDatabase
 import com.ramaa.narutowiki.data.remote.NarutoAPI
-import com.ramaa.narutowiki.data.repository.CharacterRepositoryImpl
-import com.ramaa.narutowiki.domain.manager.LocalUserManager
-import com.ramaa.narutowiki.domain.repository.CharacterRepository
-import com.ramaa.narutowiki.domain.usecases.characters.CharacterUseCases
-import com.ramaa.narutowiki.domain.usecases.characters.GetCharacters
-import com.ramaa.narutowiki.domain.usecases.characters.SearchCharacters
-import com.ramaa.narutowiki.domain.usecases.entry.AppEntry
-import com.ramaa.narutowiki.domain.usecases.entry.ReadAppEntry
-import com.ramaa.narutowiki.domain.usecases.entry.SaveAppEntry
 import com.ramaa.narutowiki.util.Constants.BASE_URL
+import com.ramaa.narutowiki.util.Constants.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,21 +22,6 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideLocalUserManger(
-        application: Application
-    ): LocalUserManager = LocalUserManagerImpl(context = application)
-
-    @Provides
-    @Singleton
-    fun provideAppEntryUseCases(
-        localUserManager: LocalUserManager
-    ): AppEntry = AppEntry(
-        readAppEntry = ReadAppEntry(localUserManager),
-        saveAppEntry = SaveAppEntry(localUserManager)
-    )
-
-    @Provides
-    @Singleton
     fun provideApiInstance(): NarutoAPI {
         return Retrofit
             .Builder()
@@ -53,21 +33,21 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCharactersRepository(
-        narutoApi: NarutoAPI
-    ): CharacterRepository {
-        return CharacterRepositoryImpl(narutoApi)
+    fun provideCharactersDatabase(
+        application: Application
+    ): CharactersDatabase {
+        return Room.databaseBuilder(
+            context = application,
+            klass = CharactersDatabase::class.java,
+            name = DATABASE_NAME
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
     @Provides
     @Singleton
-    fun provideCharactersUseCases(
-        characterRepository: CharacterRepository
-    ): CharacterUseCases {
-        return CharacterUseCases(
-            getCharacters = GetCharacters(characterRepository),
-            searchCharacters = SearchCharacters(characterRepository)
-        )
-    }
-
+    fun provideCharactersDao(
+        charactersDatabase: CharactersDatabase
+    ): CharactersDao = charactersDatabase.charactersDao
 }

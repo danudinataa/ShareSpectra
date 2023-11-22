@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -38,11 +39,11 @@ fun EmptyScreen(error: LoadState.Error? = null) {
     }
 
     var icon by remember {
-        mutableStateOf(R.drawable.baseline_error_outline_24)
+        mutableIntStateOf(R.drawable.baseline_error_outline_24)
     }
 
     if (error == null){
-        message = "You have not saved news so far !"
+        message = "You haven't saved any characters yet!"
         icon = R.drawable.baseline_image_search_24
     }
 
@@ -52,7 +53,7 @@ fun EmptyScreen(error: LoadState.Error? = null) {
 
     val alphaAnimation by animateFloatAsState(
         targetValue = if (startAnimation) 0.3f else 0f,
-        animationSpec = tween(durationMillis = 1000)
+        animationSpec = tween(durationMillis = 1000), label = "Animation"
     )
 
     LaunchedEffect(key1 = true) {

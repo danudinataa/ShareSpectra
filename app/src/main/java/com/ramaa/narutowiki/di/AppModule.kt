@@ -2,7 +2,6 @@ package com.ramaa.narutowiki.di
 
 import android.app.Application
 import androidx.room.Room
-import com.ramaa.narutowiki.data.local.CharacterConverter
 import com.ramaa.narutowiki.data.local.CharactersDao
 import com.ramaa.narutowiki.data.local.CharactersDatabase
 import com.ramaa.narutowiki.data.remote.NarutoAPI

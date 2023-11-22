@@ -33,7 +33,7 @@ fun CharacterList(
         items(
             count = itemCharacters.size,
         ) {
-            itemCharacters[it]?.let { character ->
+            itemCharacters[it].let { character ->
                 CharacterCard(itemCharacter = character, onClick = { onClick(character) })
             }
         }

@@ -9,7 +9,6 @@ object Dimens {
     val SmallPadding1 = 8.dp
     val Padding1 = 24.dp
     val Padding2 = 32.dp
-    val Padding3 = 40.dp
 
     val IndicatorSize = 14.dp
 

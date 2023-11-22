@@ -63,7 +63,8 @@ fun AppNavigator() {
     val isBottomBarVisible = remember(key1 = backStackState) {
         backStackState?.destination?.route == Route.HomeScreen.route ||
                 backStackState?.destination?.route == Route.SearchScreen.route ||
-                backStackState?.destination?.route == Route.BookmarkScreen.route
+                backStackState?.destination?.route == Route.BookmarkScreen.route ||
+                backStackState?.destination?.route == Route.ProfileScreen.route
     }
 
     Scaffold(modifier = Modifier.fillMaxSize(), bottomBar = {

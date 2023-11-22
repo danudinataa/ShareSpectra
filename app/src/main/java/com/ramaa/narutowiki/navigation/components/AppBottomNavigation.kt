@@ -77,6 +77,7 @@ fun NewsBottomNavigationPreview() {
             BottomNavigationItem(icon = R.drawable.baseline_home_24, text = "Home"),
             BottomNavigationItem(icon = R.drawable.baseline_search_24, text = "Search"),
             BottomNavigationItem(icon = R.drawable.baseline_bookmarks_24, text = "Bookmark"),
+            BottomNavigationItem(icon = R.drawable.baseline_person_24, text = "Profile")
         ), selectedItem = 0, onItemClick = {})
     }
 }

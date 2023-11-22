@@ -27,6 +27,7 @@ import com.ramaa.narutowiki.presentation.bookmark.BookmarkScreen
 import com.ramaa.narutowiki.presentation.detail.DetailsScreen
 import com.ramaa.narutowiki.presentation.home.HomeScreen
 import com.ramaa.narutowiki.presentation.navgraph.Route
+import com.ramaa.narutowiki.presentation.profile.ProfileScreen
 import com.ramaa.narutowiki.presentation.search.SearchScreen
 import com.ramaa.narutowiki.viewmodel.BookmarkViewModel
 import com.ramaa.narutowiki.viewmodel.DetailViewModel
@@ -42,7 +43,7 @@ fun AppNavigator() {
             BottomNavigationItem(icon = R.drawable.baseline_home_24, text = "Home"),
             BottomNavigationItem(icon = R.drawable.baseline_search_24, text = "Search"),
             BottomNavigationItem(icon = R.drawable.baseline_bookmarks_24, text = "Bookmark"),
-
+            BottomNavigationItem(icon = R.drawable.baseline_person_24, text = "Profile")
         )
     }
 
@@ -85,6 +86,11 @@ fun AppNavigator() {
                         2 -> navigateToTab(
                             navController = navController,
                             route = Route.BookmarkScreen.route
+                        )
+
+                        3 -> navigateToTab(
+                            navController = navController,
+                            route = Route.ProfileScreen.route
                         )
                     }
                 }
@@ -157,6 +163,10 @@ fun AppNavigator() {
                         )
                     }
                 )
+            }
+            composable(route = Route.ProfileScreen.route) {
+                OnBackClickStateSaver(navController = navController)
+                ProfileScreen()
             }
         }
     }

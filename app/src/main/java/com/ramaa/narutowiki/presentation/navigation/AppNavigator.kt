@@ -40,10 +40,10 @@ fun AppNavigator() {
 
     val bottomNavigationItems = remember {
         listOf(
-            BottomNavigationItem(icon = R.drawable.baseline_home_24, text = "Home"),
-            BottomNavigationItem(icon = R.drawable.baseline_search_24, text = "Search"),
-            BottomNavigationItem(icon = R.drawable.baseline_bookmarks_24, text = "Bookmark"),
-            BottomNavigationItem(icon = R.drawable.baseline_person_24, text = "Profile")
+            BottomNavigationItem(icon = R.drawable.baseline_home_24, text = "Home", contentDescription = "home_page"),
+            BottomNavigationItem(icon = R.drawable.baseline_search_24, text = "Search", contentDescription = "search_page"),
+            BottomNavigationItem(icon = R.drawable.baseline_bookmarks_24, text = "Bookmark", contentDescription = "bookmark_page"),
+            BottomNavigationItem(icon = R.drawable.baseline_person_24, text = "Profile", contentDescription = "about_page")
         )
     }
 

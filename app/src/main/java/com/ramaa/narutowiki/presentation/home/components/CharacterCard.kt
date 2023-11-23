@@ -76,19 +76,6 @@ fun CharacterCard(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_jutsu_icon),
-                    contentDescription = null,
-                    modifier = Modifier.size(SmallIconSize),
-                    tint = colorResource(id = R.color.body)
-                )
-                Spacer(modifier = Modifier.width(ExtraSmallPadding))
-                Text(
-                    text = itemCharacter.jutsu?.firstOrNull() ?: "Unknown",
-                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                    color = colorResource(id = R.color.body)
-                )
-                Spacer(modifier = Modifier.width(ExtraSmallPadding2))
-                Icon(
                     painter = painterResource(id = R.drawable.ic_chakra_logo),
                     contentDescription = null,
                     modifier = Modifier.size(SmallIconSize),
@@ -120,7 +107,7 @@ fun ArticleCardPreview() {
                     "https://static.wikia.nocookie.net/naruto/images/d/d6/Naruto_Part_I.png",
                     "https://static.wikia.nocookie.net/naruto/images/7/7d/Naruto_Part_II.png"
                 ),
-                uniqueTraits = listOf("BLABLABLABALBA")
+                tools = listOf("BLABLABLA")
             )
         )
     }

@@ -55,7 +55,7 @@ fun ProfileScreen() {
 
         Image (
             painter = painterResource(id = R.drawable.picture_profile),
-            contentDescription = null,
+            contentDescription = "picture_profile",
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .clip(CircleShape)

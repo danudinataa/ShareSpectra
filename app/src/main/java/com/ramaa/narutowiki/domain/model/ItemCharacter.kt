@@ -25,6 +25,7 @@ data class ItemCharacter(
     @field:SerializedName("natureType")
     val natureType: List<String>?,
 
-    @field:SerializedName("uniqueTraits")
-    val uniqueTraits: List<String>?
+    @field:SerializedName("tools")
+    val tools: List<String>?
+
 ) : Parcelable

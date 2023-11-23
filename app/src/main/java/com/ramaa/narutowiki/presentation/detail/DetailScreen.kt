@@ -116,15 +116,23 @@ fun DetailsScreen(
                     )
                 }
                 Spacer(modifier = Modifier.height(SmallPadding1))
-                
-                itemCharacter.jutsu?.forEachIndexed { index, item ->
+
+                itemCharacter.tools?.takeIf { it.isNotEmpty() }?.forEachIndexed { index, item ->
                     Text(
                         text = "${index + 1}. $item",
                         style = MaterialTheme.typography.labelMedium,
                         color = colorResource(id = R.color.body),
                         modifier = Modifier.padding(start = Padding1)
                     )
+                } ?: run {
+                    Text(
+                        text = "Unknown",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = colorResource(id = R.color.body),
+                        modifier = Modifier.padding(start = Padding1)
+                    )
                 }
+
                 Spacer(modifier = Modifier.height(Padding2))
 
                 Row(
@@ -144,16 +152,59 @@ fun DetailsScreen(
                     )
                 }
                 Spacer(modifier = Modifier.height(SmallPadding1))
-                
-                itemCharacter.natureType?.forEachIndexed { index, item ->
+
+                itemCharacter.natureType?.takeIf { it.isNotEmpty() }?.forEachIndexed { index, item ->
                     Text(
                         text = "${index + 1}. $item",
                         style = MaterialTheme.typography.labelMedium,
                         color = colorResource(id = R.color.body),
                         modifier = Modifier.padding(start = Padding1)
                     )
+                } ?: run {
+                    Text(
+                        text = "Unknown",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = colorResource(id = R.color.body),
+                        modifier = Modifier.padding(start = Padding1)
+                    )
                 }
                 
+                Spacer(modifier = Modifier.height(Padding2))
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_shuriken_icon),
+                        contentDescription = null,
+                        modifier = Modifier.size(Dimens.IconSize),
+                        tint = colorResource(id = R.color.body)
+                    )
+                    Spacer(modifier = Modifier.width(SmallPadding1))
+                    Text(
+                        text = "Ninja Tools",
+                        style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
+                        color = colorResource(id = R.color.body)
+                    )
+                }
+                Spacer(modifier = Modifier.height(SmallPadding1))
+
+                itemCharacter.tools?.takeIf { it.isNotEmpty() }?.forEachIndexed { index, item ->
+                    Text(
+                        text = "${index + 1}. $item",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = colorResource(id = R.color.body),
+                        modifier = Modifier.padding(start = Padding1)
+                    )
+                } ?: run {
+                    Text(
+                        text = "Unknown",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = colorResource(id = R.color.body),
+                        modifier = Modifier.padding(start = Padding1)
+                    )
+                }
+
                 Spacer(modifier = Modifier.height(Padding2))
             }
         }

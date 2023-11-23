@@ -44,7 +44,7 @@ fun AppBottomNavigation(
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Icon(
                             painter = painterResource(id = item.icon),
-                            contentDescription = null,
+                            contentDescription = item.contentDescription,
                             modifier = Modifier.size(IconSize),
                         )
                         Spacer(modifier = Modifier.height(ExtraSmallPadding2))
@@ -65,7 +65,8 @@ fun AppBottomNavigation(
 
 data class BottomNavigationItem(
     @DrawableRes val icon: Int,
-    val text: String
+    val text: String,
+    val contentDescription: String
 )
 
 @Preview
@@ -74,10 +75,10 @@ data class BottomNavigationItem(
 fun NewsBottomNavigationPreview() {
     NarutoWikiTheme(dynamicColor = false) {
         AppBottomNavigation(items = listOf(
-            BottomNavigationItem(icon = R.drawable.baseline_home_24, text = "Home"),
-            BottomNavigationItem(icon = R.drawable.baseline_search_24, text = "Search"),
-            BottomNavigationItem(icon = R.drawable.baseline_bookmarks_24, text = "Bookmark"),
-            BottomNavigationItem(icon = R.drawable.baseline_person_24, text = "Profile")
+            BottomNavigationItem(icon = R.drawable.baseline_home_24, text = "Home", contentDescription = "home_page"),
+            BottomNavigationItem(icon = R.drawable.baseline_search_24, text = "Search", contentDescription = "search_page"),
+            BottomNavigationItem(icon = R.drawable.baseline_bookmarks_24, text = "Bookmark", contentDescription = "bookmark_page"),
+            BottomNavigationItem(icon = R.drawable.baseline_person_24, text = "Profile", contentDescription = "about_page")
         ), selectedItem = 0, onItemClick = {})
     }
 }

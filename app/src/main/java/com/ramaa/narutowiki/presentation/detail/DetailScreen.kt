@@ -117,7 +117,7 @@ fun DetailsScreen(
                 }
                 Spacer(modifier = Modifier.height(SmallPadding1))
 
-                itemCharacter.tools?.takeIf { it.isNotEmpty() }?.forEachIndexed { index, item ->
+                itemCharacter.jutsu?.takeIf { it.isNotEmpty() }?.forEachIndexed { index, item ->
                     Text(
                         text = "${index + 1}. $item",
                         style = MaterialTheme.typography.labelMedium,

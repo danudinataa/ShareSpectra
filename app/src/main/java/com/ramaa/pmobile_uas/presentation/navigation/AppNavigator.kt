@@ -33,6 +33,7 @@ import com.ramaa.pmobile_uas.presentation.bookmark.BookmarkScreen
 import com.ramaa.pmobile_uas.presentation.detail.DetailsScreen
 import com.ramaa.pmobile_uas.presentation.home.HomeScreen
 import com.ramaa.pmobile_uas.navgraph.Route
+import com.ramaa.pmobile_uas.presentation.detail.AboutScreen
 import com.ramaa.pmobile_uas.presentation.detail.DetailsCompanyScreen
 import com.ramaa.pmobile_uas.presentation.news.NewsScreen
 import com.ramaa.pmobile_uas.presentation.profile.ProfileScreen
@@ -209,7 +210,11 @@ fun AppNavigator() {
             }
             composable(route = Route.ProfileScreen.route) {
                 OnBackClickStateSaver(navController = navController)
-                ProfileScreen()
+                ProfileScreen(navController)
+            }
+            composable(route = Route.AboutScreen.route) {
+                OnBackClickStateSaver(navController = navController)
+                AboutScreen()
             }
         }
     }

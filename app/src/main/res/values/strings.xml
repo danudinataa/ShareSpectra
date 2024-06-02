@@ -1,10 +1,11 @@
 <resources>
-    <string name="app_name">Naruto Wiki</string>
+    <string name="app_name">Share Spectra</string>
     <string name="about_me">Hi! Nice to meet you!\n It\'s Ramaa here, your friendly developer! 🙌🏻</string>
-    <string name="title_page1">More than 100 Naruto characters!</string>
-    <string name="desc_page1">You can see more than 1000 characters in the Naruto anime series.</string>
-    <string name="title_page2">Search your favorite characters!</string>
-    <string name="desc_page2">You can search for the characters you want with the search feature.</string>
-    <string name="title_page3">Add favorite characters to bookmarks</string>
-    <string name="desc_page3">You can add your favorite characters with the bookmark feature.</string>
+    <string name="title_page1">Selamat Datang di ShareSpectra!</string>
+    <string name="desc_page1">Pendamping pasar saham terbaik Anda! Untuk membuat keputusan investasi yang tepat.</string>
+    <string name="title_page2">Data Pasar Real-Time!</string>
+    <string name="desc_page2">Dapatkan akses ke harga saham terkini, tren pasar, dan berita keuangan di mana pun Anda berada.</string>
+    <string name="title_page3">Wawasan Investasi yang Dipersonalisasi!</string>
+    <string name="desc_page3">Biarkan StockGenius membantu Anda menavigasi pasar saham dengan percaya diri dan mudah.</string>
+    <string name="app_description">ShareSpectra adalah aplikasi mobile yang dirancang untuk memberikan informasi yang komprehensif tentang pasar saham kepada penggunanya. Dengan fitur-fitur yang intuitif dan up-to-date.</string>
 </resources>

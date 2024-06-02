@@ -8,8 +8,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.ramaa.pmobile_uas.data.remote.response.ResultsCompanies
-import com.ramaa.pmobile_uas.presentation.common.CharacterList
+import com.ramaa.pmobile_uas.data.remote.response.CompanyResponse
 import com.ramaa.pmobile_uas.presentation.common.CompanyList
 import com.ramaa.pmobile_uas.presentation.common.SearchBar
 import com.ramaa.pmobile_uas.util.Dimens.Padding1
@@ -18,7 +17,7 @@ import com.ramaa.pmobile_uas.util.Dimens.Padding1
 fun SearchScreen(
     state: SearchState,
     event:(SearchEvent) -> Unit,
-    navigateToDetailsCompanies: (ResultsCompanies) -> Unit
+    navigateToDetailsCompanies: (CompanyResponse) -> Unit
 ) {
 
     Column(

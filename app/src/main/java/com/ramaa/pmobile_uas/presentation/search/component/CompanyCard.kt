@@ -1,7 +1,9 @@
 package com.ramaa.pmobile_uas.presentation.search.component
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -21,35 +24,34 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.ramaa.pmobile_uas.R
-import com.ramaa.pmobile_uas.data.remote.response.ResultsCompanies
-import com.ramaa.pmobile_uas.data.remote.response.ResultsStockItem
+import com.ramaa.pmobile_uas.data.remote.response.CompanyResponse
 import com.ramaa.pmobile_uas.util.Constants
 import com.ramaa.pmobile_uas.util.Dimens
 
 @Composable
 fun CompanyCard(
     modifier: Modifier = Modifier,
-    itemCharacter: ResultsCompanies,
+    itemCharacter: CompanyResponse,
     onClick: (() -> Unit)? = null
 ) {
 
     val context = LocalContext.current
     Row(
-        modifier = modifier.clickable { onClick?.invoke() },
-
-        ) {
+        modifier = modifier.clickable { onClick?.invoke() }
+    ) {
         AsyncImage(
             modifier = Modifier
                 .size(Dimens.CharacterCardSize)
                 .clip(MaterialTheme.shapes.medium),
             model = ImageRequest.Builder(context).data(
-                itemCharacter.logo ?: Constants.IMAGE_NOT_FOUND
+                itemCharacter.data?.logo ?: Constants.IMAGE_NOT_FOUND
             ).build(),
             contentDescription = null,
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Fit // Ensure the entire image is visible without cropping
         )
         Spacer(modifier = Modifier.padding(Dimens.SmallPadding1))
         Column(
@@ -57,32 +59,43 @@ fun CompanyCard(
             modifier = Modifier
                 .padding(horizontal = Dimens.ExtraSmallPadding)
                 .height(Dimens.CharacterCardSize)
+                .align(Alignment.CenterVertically)
+                .widthIn(max = 140.dp)
         ) {
-            itemCharacter.symbol?.let {
+            itemCharacter.data?.symbol?.let {
                 Text(
                     text = it,
-                    style = MaterialTheme.typography.bodyMedium.copy(),
+                    style = MaterialTheme.typography.titleLarge.copy(),
                     color = colorResource(id = R.color.text_title),
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
             }
-            Row(
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_chakra_logo),
-                    contentDescription = null,
-                    modifier = Modifier.size(Dimens.SmallIconSize),
-                    tint = colorResource(id = R.color.body)
-                )
-                Spacer(modifier = Modifier.width(Dimens.ExtraSmallPadding))
+            itemCharacter.data?.name.toString().let {
                 Text(
-                    text = itemCharacter.ipoPercentage?.times(100).toString(),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = colorResource(id = R.color.body)
+                    text = it,
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = colorResource(id = R.color.body),
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
+        }
+        Spacer(modifier = Modifier.weight(1f))
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+                .border(1.dp, color = MaterialTheme.colorScheme.primary, shape = MaterialTheme.shapes.small)
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+                .widthIn(min = 40.dp, max = 40.dp)
+        ) {
+            Text(
+                text = "${itemCharacter.data?.ipoPercentage.toString()}%",
+                style = MaterialTheme.typography.labelMedium,
+                color = colorResource(id = R.color.body),
+                maxLines = 1,
+            )
         }
     }
 }

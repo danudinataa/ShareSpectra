@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import com.ramaa.pmobile_uas.data.remote.response.ResultsCompanies
 import com.ramaa.pmobile_uas.data.remote.response.ResultsStockItem
 import com.ramaa.pmobile_uas.presentation.home.components.CharacterCard
 import com.ramaa.pmobile_uas.util.Dimens.ExtraSmallPadding2

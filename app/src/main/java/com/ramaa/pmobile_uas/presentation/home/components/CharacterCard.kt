@@ -116,7 +116,7 @@ fun PreviewCharacterCard() {
             logo = "https://example.com/logo.png",
             name = "tesing testing tesing testing testing testing tesing"
         ),
-        percent = 0.45
+        percent = 0.45,
     )
     CharacterCard(
         modifier = Modifier.padding(16.dp),

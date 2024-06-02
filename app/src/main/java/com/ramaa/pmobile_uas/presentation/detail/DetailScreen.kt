@@ -26,6 +26,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.ramaa.pmobile_uas.R
@@ -51,8 +53,8 @@ fun DetailsScreen(
     val context = LocalContext.current
     LaunchedEffect(key1 = sideEffect) {
         sideEffect?.let {
-            when(sideEffect){
-                is UIComponent.Toast ->{
+            when (sideEffect) {
+                is UIComponent.Toast -> {
                     Toast.makeText(context, sideEffect.message, Toast.LENGTH_SHORT).show()
                     event(DetailsEvent.RemoveSideEffect)
                 }
@@ -60,9 +62,11 @@ fun DetailsScreen(
         }
     }
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .statusBarsPadding()) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .statusBarsPadding()
+    ) {
         DetailsTopBar(
             onBookmarkClick = {
                 event(DetailsEvent.UpsertDeleteCharacter(itemCharacter))
@@ -82,8 +86,7 @@ fun DetailsScreen(
                 AsyncImage(
                     model = ImageRequest.Builder(context = context).data(
                         itemCharacter.company?.logo ?: Constants.IMAGE_NOT_FOUND
-                    )
-                        .build(),
+                    ).build(),
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -92,82 +95,50 @@ fun DetailsScreen(
                     contentScale = ContentScale.Crop
                 )
                 Spacer(modifier = Modifier.height(Padding1))
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = itemCharacter.symbol,
+                        style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                    )
+                }
+                Spacer(modifier = Modifier.height(Padding2))
                 itemCharacter.company?.name?.let {
                     Text(
                         text = it,
                         style = MaterialTheme.typography.titleLarge,
-                        color = colorResource(
-                            id = R.color.text_title
-                        )
+                        color = colorResource(id = R.color.text_title)
                     )
                 }
                 Spacer(modifier = Modifier.height(Padding1))
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
+                Column(
+                    horizontalAlignment = Alignment.Start
                 ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_jutsu_icon),
-                        contentDescription = null,
-                        modifier = Modifier.size(Dimens.IconSize),
-                        tint = colorResource(id = R.color.body)
-                    )
-                    Spacer(modifier = Modifier.width(SmallPadding1))
-                    Text(
-                        text = "Jutsu",
-                        style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
-                        color = colorResource(id = R.color.body)
-                    )
+                    itemCharacter.close?.toString()?.let {
+                        Text(
+                            text = it,
+                            style = MaterialTheme.typography.displayLarge
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(SmallPadding1))
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = itemCharacter.change.toString(),
+                            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                            color = colorResource(id = R.color.body)
+                        )
+                        Spacer(modifier = Modifier.width(SmallPadding1))
+                        Text(
+                            text = "(${itemCharacter.percent.toString()}%) Hari ini",
+                            style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
+                            color = colorResource(id = R.color.body)
+                        )
+                    }
                 }
-                Spacer(modifier = Modifier.height(SmallPadding1))
-
-                itemCharacter.percent?.times(100).toString()
-
-                Spacer(modifier = Modifier.height(Padding2))
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_chakra_logo),
-                        contentDescription = null,
-                        modifier = Modifier.size(Dimens.IconSize),
-                        tint = colorResource(id = R.color.body)
-                    )
-                    Spacer(modifier = Modifier.width(SmallPadding1))
-                    Text(
-                        text = "Chakra",
-                        style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
-                        color = colorResource(id = R.color.body)
-                    )
-                }
-                Spacer(modifier = Modifier.height(SmallPadding1))
-
-                itemCharacter.close ?: "unknown"
-                
-                Spacer(modifier = Modifier.height(Padding2))
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_shuriken_icon),
-                        contentDescription = null,
-                        modifier = Modifier.size(Dimens.IconSize),
-                        tint = colorResource(id = R.color.body)
-                    )
-                    Spacer(modifier = Modifier.width(SmallPadding1))
-                    Text(
-                        text = "Ninja Tools",
-                        style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold),
-                        color = colorResource(id = R.color.body)
-                    )
-                }
-                Spacer(modifier = Modifier.height(SmallPadding1))
-
-                itemCharacter.change ?: "unknown"
-
-                Spacer(modifier = Modifier.height(Padding2))
             }
         }
     }

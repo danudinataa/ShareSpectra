@@ -49,7 +49,8 @@ data class ResultsStockItem(
 	val close: Int? = null,
 
 	@field:SerializedName("percent")
-	val percent: Double? = null
+	val percent: Double? = null,
+
 ) : Parcelable
 
 @Parcelize

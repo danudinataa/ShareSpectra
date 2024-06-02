@@ -1,5 +1,6 @@
 package com.ramaa.pmobile_uas.data.repository
 
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -7,9 +8,8 @@ import com.ramaa.pmobile_uas.data.local.CharactersDao
 import com.ramaa.pmobile_uas.data.remote.CharacterPagingSource
 import com.ramaa.pmobile_uas.data.remote.NarutoAPI
 import com.ramaa.pmobile_uas.data.remote.SearchPagingSource
-import com.ramaa.pmobile_uas.data.remote.response.ResultsCompanies
+import com.ramaa.pmobile_uas.data.remote.response.CompanyResponse
 import com.ramaa.pmobile_uas.data.remote.response.ResultsStockItem
-import com.ramaa.pmobile_uas.domain.model.ItemCharacter
 import com.ramaa.pmobile_uas.domain.repository.CharacterRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -28,7 +28,7 @@ class CharacterRepositoryImpl @Inject constructor(
         ).flow
     }
 
-    override fun searchCharacter(searchQuery: String): Flow<PagingData<ResultsCompanies>> {
+    override fun searchCharacter(searchQuery: String): Flow<PagingData<CompanyResponse>> {
         return Pager(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = {

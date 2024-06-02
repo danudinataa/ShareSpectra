@@ -1,9 +1,7 @@
 package com.ramaa.pmobile_uas.data.remote
 
-import com.ramaa.pmobile_uas.data.remote.response.CharactersResponse
-import com.ramaa.pmobile_uas.data.remote.response.ResultsCompanies
+import com.ramaa.pmobile_uas.data.remote.response.CompanyResponse
 import com.ramaa.pmobile_uas.data.remote.response.StockResponse
-import com.ramaa.pmobile_uas.domain.model.ItemCharacter
 import com.ramaa.pmobile_uas.util.Constants
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -22,5 +20,11 @@ interface NarutoAPI {
     suspend fun searchCharacter(
         @Path("symbol") symbol: String,
         @Header("X-API-KEY") apiKey: String = Constants.API_KEY
-    ): ResultsCompanies
+    ): CompanyResponse
+
+    @GET("news")
+    suspend fun getNews(
+        @Query("page") page: Int,
+        @Header("X-API-KEY") apiKey: String = Constants.API_KEY
+    ): StockResponse
 }

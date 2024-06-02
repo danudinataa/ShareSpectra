@@ -20,23 +20,23 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.ramaa.pmobile_uas.R
-import com.ramaa.pmobile_uas.data.remote.response.ResultsCompanies
+import com.ramaa.pmobile_uas.data.remote.response.CompanyResponse
 import com.ramaa.pmobile_uas.data.remote.response.ResultsStockItem
-import com.ramaa.pmobile_uas.domain.model.ItemCharacter
 import com.ramaa.pmobile_uas.presentation.navigation.components.AppBottomNavigation
 import com.ramaa.pmobile_uas.presentation.navigation.components.BottomNavigationItem
 import com.ramaa.pmobile_uas.presentation.bookmark.BookmarkScreen
 import com.ramaa.pmobile_uas.presentation.detail.DetailsScreen
 import com.ramaa.pmobile_uas.presentation.home.HomeScreen
 import com.ramaa.pmobile_uas.navgraph.Route
+import com.ramaa.pmobile_uas.presentation.detail.DetailsCompanyScreen
 import com.ramaa.pmobile_uas.presentation.profile.ProfileScreen
 import com.ramaa.pmobile_uas.presentation.search.SearchScreen
 import com.ramaa.pmobile_uas.viewmodel.BookmarkViewModel
+import com.ramaa.pmobile_uas.viewmodel.DetailCompanyViewModel
 import com.ramaa.pmobile_uas.viewmodel.DetailViewModel
 import com.ramaa.pmobile_uas.viewmodel.HomeViewModel
 import com.ramaa.pmobile_uas.viewmodel.SearchViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AppNavigator() {
 
@@ -154,6 +154,19 @@ fun AppNavigator() {
                     }
 
             }
+            composable(route = Route.DetailsCompanyScreen.route) {
+                val viewModel: DetailCompanyViewModel = hiltViewModel()
+                navController.previousBackStackEntry?.savedStateHandle?.get<CompanyResponse?>("character")
+                    ?.let { character ->
+                        DetailsCompanyScreen(
+                            itemCharacter = character,
+                            event = viewModel::onEvent,
+                            navigateUp = { navController.navigateUp() },
+                            sideEffect = viewModel.sideEffect
+                        )
+                    }
+
+            }
             composable(route = Route.BookmarkScreen.route) {
                 val viewModel: BookmarkViewModel = hiltViewModel()
                 val state = viewModel.state.value
@@ -195,10 +208,10 @@ private fun navigateToDetails(navController: NavController, itemCharacter: Resul
     )
 }
 
-private fun navigateToDetailsCompanies(navController: NavController, itemCharacter: ResultsCompanies){
+private fun navigateToDetailsCompanies(navController: NavController, itemCharacter: CompanyResponse){
     navController.currentBackStackEntry?.savedStateHandle?.set("character", itemCharacter)
     navController.navigate(
-        route = Route.DetailsScreen.route
+        route = Route.DetailsCompanyScreen.route
     )
 }
 

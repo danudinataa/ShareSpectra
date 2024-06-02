@@ -76,6 +76,7 @@ fun NewsBottomNavigationPreview() {
     NarutoWikiTheme(dynamicColor = false) {
         AppBottomNavigation(items = listOf(
             BottomNavigationItem(icon = R.drawable.baseline_home_24, text = "Home", contentDescription = "home_page"),
+            BottomNavigationItem(icon = R.drawable.baseline_newspaper_24, text = "News", contentDescription = "news_page"),
             BottomNavigationItem(icon = R.drawable.baseline_search_24, text = "Search", contentDescription = "search_page"),
             BottomNavigationItem(icon = R.drawable.baseline_bookmarks_24, text = "Bookmark", contentDescription = "bookmark_page"),
             BottomNavigationItem(icon = R.drawable.baseline_person_24, text = "Profile", contentDescription = "about_page")

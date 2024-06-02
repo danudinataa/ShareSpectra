@@ -7,8 +7,10 @@ import androidx.paging.PagingData
 import com.ramaa.pmobile_uas.data.local.CharactersDao
 import com.ramaa.pmobile_uas.data.remote.CharacterPagingSource
 import com.ramaa.pmobile_uas.data.remote.NarutoAPI
+import com.ramaa.pmobile_uas.data.remote.NewsPagingSource
 import com.ramaa.pmobile_uas.data.remote.SearchPagingSource
 import com.ramaa.pmobile_uas.data.remote.response.CompanyResponse
+import com.ramaa.pmobile_uas.data.remote.response.ResultsNewsItem
 import com.ramaa.pmobile_uas.data.remote.response.ResultsStockItem
 import com.ramaa.pmobile_uas.domain.repository.CharacterRepository
 import kotlinx.coroutines.flow.Flow
@@ -24,6 +26,14 @@ class CharacterRepositoryImpl @Inject constructor(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = {
                 CharacterPagingSource(narutoAPI = narutoAPI)
+            }
+        ).flow
+    }
+    override fun getNews(): Flow<PagingData<ResultsNewsItem>> {
+        return Pager(
+            config = PagingConfig(pageSize = 10),
+            pagingSourceFactory = {
+                NewsPagingSource(narutoAPI = narutoAPI)
             }
         ).flow
     }

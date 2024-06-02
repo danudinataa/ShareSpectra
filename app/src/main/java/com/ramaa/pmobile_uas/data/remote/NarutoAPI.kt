@@ -1,6 +1,7 @@
 package com.ramaa.pmobile_uas.data.remote
 
 import com.ramaa.pmobile_uas.data.remote.response.CompanyResponse
+import com.ramaa.pmobile_uas.data.remote.response.NewsResponse
 import com.ramaa.pmobile_uas.data.remote.response.StockResponse
 import com.ramaa.pmobile_uas.util.Constants
 import retrofit2.http.GET
@@ -26,5 +27,5 @@ interface NarutoAPI {
     suspend fun getNews(
         @Query("page") page: Int,
         @Header("X-API-KEY") apiKey: String = Constants.API_KEY
-    ): StockResponse
+    ): NewsResponse
 }

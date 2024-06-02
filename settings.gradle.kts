@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Naruto Wiki"
+rootProject.name = "PMobile UAS"
 include(":app")
  

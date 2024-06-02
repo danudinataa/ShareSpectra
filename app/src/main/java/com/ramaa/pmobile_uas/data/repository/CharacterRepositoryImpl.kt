@@ -31,11 +31,10 @@ class CharacterRepositoryImpl @Inject constructor(
     }
     override fun getNews(): Flow<PagingData<ResultsNewsItem>> {
         return Pager(
-            config = PagingConfig(pageSize = 10),
-            pagingSourceFactory = {
-                NewsPagingSource(narutoAPI = narutoAPI)
-            }
-        ).flow
+            config = PagingConfig(pageSize = 10, enablePlaceholders = false)
+        ) {
+            NewsPagingSource(narutoAPI)
+        }.flow
     }
 
     override fun searchCharacter(searchQuery: String): Flow<PagingData<CompanyResponse>> {

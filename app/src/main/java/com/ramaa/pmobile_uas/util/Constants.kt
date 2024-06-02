@@ -11,5 +11,5 @@ object Constants {
 
     const val DATABASE_NAME = "characters_db"
 
-    const val API_KEY = "4bccd384-af88-5f56-427f-b47b3f0a"
+    const val API_KEY = "0277df61-dcb4-5d2f-0899-ce432cfb"
 }

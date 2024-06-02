@@ -185,7 +185,7 @@ fun DetailsCompanyScreen(
                 Button(
                     onClick = {
                         val intent = Intent(Intent.ACTION_VIEW).apply {
-                            data = Uri.parse(itemCharacter.data?.website)
+                            data = Uri.parse("https://${itemCharacter.data?.website}")
                         }
                         context.startActivity(intent)
                     },

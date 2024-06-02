@@ -32,7 +32,7 @@ class CharacterPagingSource(
 
             LoadResult.Page(
                 data = articles,
-                nextKey = if (articles.size < pageSize) null else page + 1,
+                nextKey = if (articles.size > pageSize) null else page + 1,
                 prevKey = null
             )
         } catch (e: Exception) {

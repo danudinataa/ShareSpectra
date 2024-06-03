@@ -4,12 +4,16 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
@@ -29,21 +33,25 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.room.util.copy
 import com.ramaa.pmobile_uas.R
+import com.ramaa.pmobile_uas.presentation.detail.components.DetailsCompanyTopBar
 import com.ramaa.pmobile_uas.util.Dimens
 import com.ramaa.pmobile_uas.util.Dimens.Padding1
 
 @Composable
-fun AboutScreen() {
+fun AboutScreen(
+    navigateUp: () -> Unit,
+) {
     Column(
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxWidth()
-            .padding(Padding1)
-            .verticalScroll(rememberScrollState()) ,
+            .padding(Padding1),  // Keep padding
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        Spacer(modifier = Modifier.padding(Padding1))
+        DetailsCompanyTopBar(
+            onBackClick = navigateUp
+        )
 
         Text(
             text = "About Us",
@@ -61,7 +69,7 @@ fun AboutScreen() {
         )
 
         Text(
-            text = stringResource(R.string.app_description),
+            text = stringResource(id = R.string.app_description),
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(bottom = Padding1)

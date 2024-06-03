@@ -17,6 +17,8 @@ sealed class Route(
 
     object DetailsScreen : Route(route = "detailsScreen")
 
+    object SignInScreen : Route(route = "signInScreen")
+
     object DetailsCompanyScreen : Route(route = "detailsCompanyScreen")
 
     object AboutScreen : Route(route = "aboutScreen")

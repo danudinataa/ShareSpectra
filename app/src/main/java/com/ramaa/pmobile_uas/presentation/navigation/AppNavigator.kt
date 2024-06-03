@@ -1,28 +1,42 @@
 package com.ramaa.pmobile_uas.presentation.navigation
 
+import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LocalLifecycleOwner
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.google.android.gms.auth.api.identity.Identity
 import com.ramaa.pmobile_uas.R
 import com.ramaa.pmobile_uas.data.remote.response.CompanyResponse
 import com.ramaa.pmobile_uas.data.remote.response.ResultsNewsItem
@@ -35,6 +49,9 @@ import com.ramaa.pmobile_uas.presentation.home.HomeScreen
 import com.ramaa.pmobile_uas.navgraph.Route
 import com.ramaa.pmobile_uas.presentation.detail.AboutScreen
 import com.ramaa.pmobile_uas.presentation.detail.DetailsCompanyScreen
+import com.ramaa.pmobile_uas.presentation.login.GoogleAuthUiClient
+import com.ramaa.pmobile_uas.presentation.login.SignInScreen
+import com.ramaa.pmobile_uas.presentation.main.MainActivity
 import com.ramaa.pmobile_uas.presentation.news.NewsScreen
 import com.ramaa.pmobile_uas.presentation.profile.ProfileScreen
 import com.ramaa.pmobile_uas.presentation.search.SearchScreen
@@ -44,6 +61,8 @@ import com.ramaa.pmobile_uas.viewmodel.DetailViewModel
 import com.ramaa.pmobile_uas.viewmodel.HomeViewModel
 import com.ramaa.pmobile_uas.viewmodel.NewsViewModel
 import com.ramaa.pmobile_uas.viewmodel.SearchViewModel
+import com.ramaa.pmobile_uas.viewmodel.SignInViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun AppNavigator() {
@@ -210,11 +229,22 @@ fun AppNavigator() {
             }
             composable(route = Route.ProfileScreen.route) {
                 OnBackClickStateSaver(navController = navController)
-                ProfileScreen(navController)
+                val context = LocalContext.current as MainActivity
+                ProfileScreen(
+                    navController = navController,
+                    userData = context.googleAuthUiClient.getSignedInUser(),
+                    onSignOut = {
+
+                    },
+                    onSignIn = {
+                    }
+
+                )
             }
+
             composable(route = Route.AboutScreen.route) {
                 OnBackClickStateSaver(navController = navController)
-                AboutScreen()
+                AboutScreen(navigateUp = { navController.navigateUp() })
             }
         }
     }

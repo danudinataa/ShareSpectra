@@ -9,16 +9,16 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface NarutoAPI {
+interface StockAPI {
 
     @GET("trending")
-    suspend fun getCharacters(
+    suspend fun getStocks(
         @Query("page") page: Int,
         @Header("X-API-KEY") apiKey: String = Constants.API_KEY
     ): StockResponse
 
     @GET("{symbol}/profile")
-    suspend fun searchCharacter(
+    suspend fun searchCompany(
         @Path("symbol") symbol: String,
         @Header("X-API-KEY") apiKey: String = Constants.API_KEY
     ): CompanyResponse

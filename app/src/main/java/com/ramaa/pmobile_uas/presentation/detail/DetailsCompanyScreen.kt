@@ -13,13 +13,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,23 +27,20 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.ramaa.pmobile_uas.R
 import com.ramaa.pmobile_uas.data.remote.response.CompanyResponse
-import com.ramaa.pmobile_uas.data.remote.response.ResultsStockItem
 import com.ramaa.pmobile_uas.presentation.detail.components.DetailsCompanyTopBar
-import com.ramaa.pmobile_uas.presentation.detail.components.DetailsTopBar
 import com.ramaa.pmobile_uas.util.Constants
 import com.ramaa.pmobile_uas.util.Dimens
 import com.ramaa.pmobile_uas.util.UIComponent
 
 @Composable
 fun DetailsCompanyScreen(
-    itemCharacter: CompanyResponse,
+    itemCompany: CompanyResponse,
     event: (DetailsCompanyEvent) -> Unit,
     navigateUp: () -> Unit,
     sideEffect: UIComponent?
@@ -81,7 +75,7 @@ fun DetailsCompanyScreen(
             item {
                 AsyncImage(
                     model = ImageRequest.Builder(context = context).data(
-                        itemCharacter.data?.logo ?: Constants.IMAGE_NOT_FOUND
+                        itemCompany.data?.logo ?: Constants.IMAGE_NOT_FOUND
                     ).build(),
                     contentDescription = null,
                     modifier = Modifier
@@ -95,7 +89,7 @@ fun DetailsCompanyScreen(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    itemCharacter.data?.symbol?.let {
+                    itemCompany.data?.symbol?.let {
                         Text(
                             text = it,
                             style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
@@ -114,7 +108,7 @@ fun DetailsCompanyScreen(
                             )
                             .padding(horizontal = 16.dp, vertical = 8.dp)
                     ) {
-                        itemCharacter.data?.sectorName?.let {
+                        itemCompany.data?.sectorName?.let {
                             Text(
                                 text = it,
                                 style = MaterialTheme.typography.labelMedium,
@@ -134,7 +128,7 @@ fun DetailsCompanyScreen(
                             )
                             .padding(horizontal = 16.dp, vertical = 8.dp)
                     ) {
-                        itemCharacter.data?.industryName?.let {
+                        itemCompany.data?.industryName?.let {
                             Text(
                                 text = it,
                                 style = MaterialTheme.typography.labelMedium,
@@ -145,7 +139,7 @@ fun DetailsCompanyScreen(
                     }
                 }
                 Spacer(modifier = Modifier.height(Dimens.Padding1))
-                itemCharacter.data?.name?.let {
+                itemCompany.data?.name?.let {
                     Text(
                         text = it,
                         style = MaterialTheme.typography.titleLarge,
@@ -156,7 +150,7 @@ fun DetailsCompanyScreen(
                 Column(
                     horizontalAlignment = Alignment.Start
                 ) {
-                    itemCharacter.data?.ipoOfferingShares.toString()?.let {
+                    itemCompany.data?.ipoOfferingShares.toString()?.let {
                         Text(
                             text = it,
                             style = MaterialTheme.typography.displayLarge
@@ -167,12 +161,12 @@ fun DetailsCompanyScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Text(
-                            text = "(${itemCharacter.data?.ipoPercentage.toString()}%)",
+                            text = "(${itemCompany.data?.ipoPercentage.toString()}%)",
                             style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
                             color = colorResource(id = R.color.body)
                         )
                         Spacer(modifier = Modifier.width(Dimens.SmallPadding1))
-                        itemCharacter.data?.status?.let {
+                        itemCompany.data?.status?.let {
                             Text(
                                 text = it,
                                 style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold),
@@ -185,7 +179,7 @@ fun DetailsCompanyScreen(
                 Button(
                     onClick = {
                         val intent = Intent(Intent.ACTION_VIEW).apply {
-                            data = Uri.parse("https://${itemCharacter.data?.website}")
+                            data = Uri.parse("https://${itemCompany.data?.website}")
                         }
                         context.startActivity(intent)
                     },

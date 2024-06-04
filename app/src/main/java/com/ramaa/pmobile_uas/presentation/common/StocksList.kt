@@ -11,18 +11,18 @@ import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.ramaa.pmobile_uas.data.remote.response.ResultsStockItem
-import com.ramaa.pmobile_uas.presentation.home.components.CharacterCard
+import com.ramaa.pmobile_uas.presentation.home.components.StockCard
 import com.ramaa.pmobile_uas.util.Dimens.ExtraSmallPadding2
 import com.ramaa.pmobile_uas.util.Dimens.Padding1
 
 
 @Composable
-fun CharacterList(
+fun StocksList(
     modifier: Modifier = Modifier,
-    itemCharacters: List<ResultsStockItem>,
+    itemStocks: List<ResultsStockItem>,
     onClick: (ResultsStockItem) -> Unit
 ) {
-    if (itemCharacters.isEmpty()){
+    if (itemStocks.isEmpty()){
         EmptyScreen()
     }
     LazyColumn(
@@ -31,17 +31,17 @@ fun CharacterList(
         contentPadding = PaddingValues(all = ExtraSmallPadding2)
     ) {
         items(
-            count = itemCharacters.size,
+            count = itemStocks.size,
         ) {
-            itemCharacters[it].let { character ->
-                CharacterCard(itemCharacter = character, onClick = { onClick(character) })
+            itemStocks[it].let { character ->
+                StockCard(itemStock = character, onClick = { onClick(character) })
             }
         }
     }
 }
 
 @Composable
-fun CharacterList(
+fun StocksList(
     modifier: Modifier = Modifier,
     characters: LazyPagingItems<ResultsStockItem>,
     onClick:(ResultsStockItem) -> Unit
@@ -59,7 +59,7 @@ fun CharacterList(
                 count = characters.itemCount,
             ) {
                 characters[it]?.let { character ->
-                    CharacterCard(itemCharacter = character, onClick = {onClick(character)})
+                    StockCard(itemStock = character, onClick = {onClick(character)})
                 }
             }
         }
@@ -67,8 +67,8 @@ fun CharacterList(
 }
 
 @Composable
-fun handlePagingResult(articles: LazyPagingItems<ResultsStockItem>): Boolean {
-    val loadState = articles.loadState
+fun handlePagingResult(stocks: LazyPagingItems<ResultsStockItem>): Boolean {
+    val loadState = stocks.loadState
     val error = when {
         loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
         loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error

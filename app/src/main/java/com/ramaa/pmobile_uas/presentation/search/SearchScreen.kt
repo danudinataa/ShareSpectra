@@ -30,14 +30,14 @@ fun SearchScreen(
             readOnly = false,
             onValueChange = { event(SearchEvent.UpdateSearchQuery(it)) },
             onSearch = {
-                event(SearchEvent.SearchCharacters)
+                event(SearchEvent.SearchCompanies)
             }
         )
         Spacer(modifier = Modifier.height(Padding1))
-        state.characters?.let {
+        state.companies?.let {
             val characters = it.collectAsLazyPagingItems()
             CompanyList(
-                characters = characters,
+                companies = characters,
                 onClick = { character ->
                     navigateToDetailsCompanies(character)
                 }

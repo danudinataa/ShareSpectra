@@ -3,14 +3,11 @@ package com.ramaa.pmobile_uas.data.remote
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.ramaa.pmobile_uas.data.remote.response.NewsResponse
 import com.ramaa.pmobile_uas.data.remote.response.ResultsNewsItem
-import com.ramaa.pmobile_uas.data.remote.response.ResultsStockItem
-import com.ramaa.pmobile_uas.domain.model.ItemCharacter
 import com.ramaa.pmobile_uas.util.Constants
 
 class NewsPagingSource(
-    private val narutoAPI: NarutoAPI
+    private val stockAPI: StockAPI
 ) : PagingSource<Int, ResultsNewsItem>() {
 
     override fun getRefreshKey(state: PagingState<Int, ResultsNewsItem>): Int? {
@@ -25,19 +22,19 @@ class NewsPagingSource(
         val pageSize = params.loadSize
 
         return try {
-            val newsResponse = narutoAPI.getNews(page = page, apiKey = Constants.API_KEY)
-            val articles = newsResponse.data?.results
+            val newsResponse = stockAPI.getNews(page = page, apiKey = Constants.API_KEY)
+            val stocks = newsResponse.data?.results
                 ?.filterNotNull()
                 ?.distinctBy { it.url } ?: emptyList()
 
             // Logging untuk debug
-            Log.d("NewsPagingSource", "Page: $page, Articles: ${articles.size}, PageSize: $pageSize")
+            Log.d("NewsPagingSource", "Page: $page, Articles: ${stocks.size}, PageSize: $pageSize")
 
-            val nextKey = if (articles.size > pageSize) null else page + 1
+            val nextKey = if (stocks.size > pageSize) null else page + 1
 
-            Log.d("Next Key", "Key: $nextKey, Articles: ${articles.size}, PageSize: $pageSize")
+            Log.d("Next Key", "Key: $nextKey, Articles: ${stocks.size}, PageSize: $pageSize")
             LoadResult.Page(
-                data = articles,
+                data = stocks,
                 nextKey = nextKey,
                 prevKey = if (page == 1) null else page - 1
             )

@@ -10,9 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +20,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -35,7 +32,7 @@ import com.ramaa.pmobile_uas.util.Dimens
 @Composable
 fun CompanyCard(
     modifier: Modifier = Modifier,
-    itemCharacter: CompanyResponse,
+    itemCompanies: CompanyResponse,
     onClick: (() -> Unit)? = null
 ) {
 
@@ -48,7 +45,7 @@ fun CompanyCard(
                 .size(Dimens.CharacterCardSize)
                 .clip(MaterialTheme.shapes.medium),
             model = ImageRequest.Builder(context).data(
-                itemCharacter.data?.logo ?: Constants.IMAGE_NOT_FOUND
+                itemCompanies.data?.logo ?: Constants.IMAGE_NOT_FOUND
             ).build(),
             contentDescription = null,
             contentScale = ContentScale.Fit // Ensure the entire image is visible without cropping
@@ -62,7 +59,7 @@ fun CompanyCard(
                 .align(Alignment.CenterVertically)
                 .widthIn(max = 140.dp)
         ) {
-            itemCharacter.data?.symbol?.let {
+            itemCompanies.data?.symbol?.let {
                 Text(
                     text = it,
                     style = MaterialTheme.typography.titleLarge.copy(),
@@ -71,7 +68,7 @@ fun CompanyCard(
                     overflow = TextOverflow.Ellipsis
                 )
             }
-            itemCharacter.data?.name.toString().let {
+            itemCompanies.data?.name.toString().let {
                 Text(
                     text = it,
                     style = MaterialTheme.typography.bodyMedium,
@@ -91,7 +88,7 @@ fun CompanyCard(
                 .widthIn(min = 40.dp, max = 40.dp)
         ) {
             Text(
-                text = "${itemCharacter.data?.ipoPercentage.toString()}%",
+                text = "${itemCompanies.data?.ipoPercentage.toString()}%",
                 style = MaterialTheme.typography.labelMedium,
                 color = colorResource(id = R.color.body),
                 maxLines = 1,

@@ -14,8 +14,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import com.ramaa.pmobile_uas.R
 import com.ramaa.pmobile_uas.data.remote.response.ResultsStockItem
-import com.ramaa.pmobile_uas.domain.model.ItemCharacter
-import com.ramaa.pmobile_uas.presentation.common.CharacterList
+import com.ramaa.pmobile_uas.presentation.common.StocksList
 import com.ramaa.pmobile_uas.util.Dimens.Padding1
 
 @Composable
@@ -37,8 +36,8 @@ fun BookmarkScreen(
 
         Spacer(modifier = Modifier.height(Padding1))
 
-        CharacterList(
-            itemCharacters = state.itemCharacters,
+        StocksList(
+            itemStocks = state.itemStocks,
             onClick = navigateToDetails
         )
     }

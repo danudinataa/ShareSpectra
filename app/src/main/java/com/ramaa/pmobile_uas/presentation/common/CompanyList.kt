@@ -16,11 +16,11 @@ import com.ramaa.pmobile_uas.util.Dimens.Padding1
 @Composable
 fun CompanyList(
     modifier: Modifier = Modifier,
-    characters: LazyPagingItems<CompanyResponse>,
+    companies: LazyPagingItems<CompanyResponse>,
     onClick:(CompanyResponse) -> Unit
 ) {
 
-    val handlePagingResult = handlePagingResult(characters)
+    val handlePagingResult = handlePagingResult(companies)
 
     if (handlePagingResult) {
         LazyColumn(
@@ -29,10 +29,10 @@ fun CompanyList(
             contentPadding = PaddingValues(all = ExtraSmallPadding2)
         ) {
             items(
-                count = characters.itemCount,
+                count = companies.itemCount,
             ) {
-                characters[it]?.let { character ->
-                    CompanyCard(itemCharacter = character, onClick = {onClick(character)})
+                companies[it]?.let { character ->
+                    CompanyCard(itemCompanies = character, onClick = {onClick(character)})
                 }
             }
         }
@@ -40,8 +40,8 @@ fun CompanyList(
 }
 
 @Composable
-fun handlePagingResult(articles: LazyPagingItems<CompanyResponse>): Boolean {
-    val loadState = articles.loadState
+fun handlePagingResult(companies: LazyPagingItems<CompanyResponse>): Boolean {
+    val loadState = companies.loadState
     val error = when {
         loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
         loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error

@@ -1,7 +1,6 @@
 package com.ramaa.pmobile_uas.data.remote
 
 import android.util.Log
-import android.widget.Toast
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.ramaa.pmobile_uas.data.remote.response.CompanyResponse
@@ -9,7 +8,7 @@ import com.ramaa.pmobile_uas.util.Constants
 import java.lang.Exception
 
 class SearchPagingSource(
-    private val api: NarutoAPI,
+    private val api: StockAPI,
     private val searchQuery: String
 ) : PagingSource<Int, CompanyResponse>() {
 
@@ -25,7 +24,7 @@ class SearchPagingSource(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, CompanyResponse> {
         val page = params.key ?: 1
         return try {
-            val characterResponse = api.searchCharacter(symbol = searchQuery, apiKey = Constants.API_KEY)
+            val characterResponse = api.searchCompany(symbol = searchQuery, apiKey = Constants.API_KEY)
             totalCharactersCount += 1
 
             Log.d("SearchPagingSource", "Data loaded successfully for page: $page")

@@ -1,22 +1,14 @@
 package com.ramaa.pmobile_uas.presentation.news.component
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,27 +17,22 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.ramaa.pmobile_uas.R
-import com.ramaa.pmobile_uas.data.remote.response.Company
 import com.ramaa.pmobile_uas.data.remote.response.ResultsNewsItem
-import com.ramaa.pmobile_uas.data.remote.response.ResultsStockItem
 import com.ramaa.pmobile_uas.util.Constants.IMAGE_NOT_FOUND
 import com.ramaa.pmobile_uas.util.Dimens.CharacterCardSize
 import com.ramaa.pmobile_uas.util.Dimens.ExtraSmallPadding
-import com.ramaa.pmobile_uas.util.Dimens.SmallIconSize
 import com.ramaa.pmobile_uas.util.Dimens.SmallPadding1
 
 @Composable
 fun NewsCard(
     modifier: Modifier = Modifier,
-    itemCharacter: ResultsNewsItem,
+    itemNews: ResultsNewsItem,
     onClick: (() -> Unit)? = null
 ) {
 
@@ -58,7 +45,7 @@ fun NewsCard(
                 .size(CharacterCardSize)
                 .clip(MaterialTheme.shapes.medium),
             model = ImageRequest.Builder(context).data(
-                itemCharacter.image ?: IMAGE_NOT_FOUND
+                itemNews.image ?: IMAGE_NOT_FOUND
             ).build(),
             contentDescription = null,
             contentScale = ContentScale.Fit
@@ -71,7 +58,7 @@ fun NewsCard(
                 .height(CharacterCardSize)
                 .align(Alignment.CenterVertically)
         ) {
-            itemCharacter.title?.let {
+            itemNews.title?.let {
                 Text(
                     text = it,
                     style = MaterialTheme.typography.titleSmall.copy(),
@@ -80,7 +67,7 @@ fun NewsCard(
                     overflow = TextOverflow.Ellipsis
                 )
             }
-            itemCharacter.description?.let {
+            itemNews.description?.let {
                 Text(
                     text = it,
                     style = MaterialTheme.typography.bodyMedium,
@@ -103,7 +90,7 @@ fun PreviewCharacterCard() {
     )
     NewsCard(
         modifier = Modifier.padding(16.dp),
-        itemCharacter = sampleItemCharacter,
+        itemNews = sampleItemCharacter,
         onClick = { /* Handle click */ }
     )
 }

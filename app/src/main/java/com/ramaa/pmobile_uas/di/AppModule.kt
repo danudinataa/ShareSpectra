@@ -5,9 +5,9 @@ import android.content.Context
 import androidx.room.Room
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
-import com.ramaa.pmobile_uas.data.local.CharactersDao
-import com.ramaa.pmobile_uas.data.local.CharactersDatabase
-import com.ramaa.pmobile_uas.data.remote.NarutoAPI
+import com.ramaa.pmobile_uas.data.local.StocksDao
+import com.ramaa.pmobile_uas.data.local.StocksDatabase
+import com.ramaa.pmobile_uas.data.remote.StockAPI
 import com.ramaa.pmobile_uas.presentation.login.GoogleAuthUiClient
 import com.ramaa.pmobile_uas.util.Constants.BASE_URL
 import com.ramaa.pmobile_uas.util.Constants.DATABASE_NAME
@@ -26,23 +26,23 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideApiInstance(): NarutoAPI {
+    fun provideApiInstance(): StockAPI {
         return Retrofit
             .Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(NarutoAPI::class.java)
+            .create(StockAPI::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideCharactersDatabase(
+    fun provideStocksDatabase(
         application: Application
-    ): CharactersDatabase {
+    ): StocksDatabase {
         return Room.databaseBuilder(
             context = application,
-            klass = CharactersDatabase::class.java,
+            klass = StocksDatabase::class.java,
             name = DATABASE_NAME
         )
             .fallbackToDestructiveMigration()
@@ -51,9 +51,9 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideCharactersDao(
-        charactersDatabase: CharactersDatabase
-    ): CharactersDao = charactersDatabase.charactersDao
+    fun provideStocksDao(
+        stocksDatabase: StocksDatabase
+    ): StocksDao = stocksDatabase.stocksDao
 
     @Provides
     @Singleton

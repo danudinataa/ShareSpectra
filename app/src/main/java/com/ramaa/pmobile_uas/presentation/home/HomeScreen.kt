@@ -12,13 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.paging.compose.LazyPagingItems
 import com.ramaa.pmobile_uas.data.remote.response.ResultsStockItem
 import com.ramaa.pmobile_uas.navgraph.Route
-import com.ramaa.pmobile_uas.presentation.common.CharacterList
+import com.ramaa.pmobile_uas.presentation.common.StocksList
 import com.ramaa.pmobile_uas.presentation.common.SearchBar
 import com.ramaa.pmobile_uas.util.Dimens.Padding1
 
 @Composable
 fun HomeScreen(
-    characters: LazyPagingItems<ResultsStockItem>,
+    stocks: LazyPagingItems<ResultsStockItem>,
     navigateToSearch:(String) -> Unit,
     navigateToDetails: (ResultsStockItem) -> Unit
 ) {
@@ -45,9 +45,9 @@ fun HomeScreen(
 
         Spacer(modifier = Modifier.height(Padding1))
 
-        CharacterList(
+        StocksList(
             modifier = Modifier.padding(horizontal = Padding1),
-            characters = characters,
+            characters = stocks,
             onClick = navigateToDetails
         )
     }

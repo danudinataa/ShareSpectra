@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1093664055722",
+    "project_id": "signinpmobileuas",
+    "storage_bucket": "signinpmobileuas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1093664055722:android:bbd8a6ecbadea8d50bcbd3",
+        "android_client_info": {
+          "package_name": "com.ramaa.pmobile_uas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCOCAjesWYHosf_BG1ODiHNj18VJwdEQmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

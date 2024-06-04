@@ -1,20 +1,15 @@
 package com.ramaa.pmobile_uas.presentation.common
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.ramaa.pmobile_uas.data.remote.response.ResultsNewsItem
-import com.ramaa.pmobile_uas.data.remote.response.ResultsStockItem
-import com.ramaa.pmobile_uas.presentation.home.components.CharacterCard
 import com.ramaa.pmobile_uas.presentation.news.component.NewsCard
-import com.ramaa.pmobile_uas.util.Dimens
 import com.ramaa.pmobile_uas.util.Dimens.ExtraSmallPadding2
 import com.ramaa.pmobile_uas.util.Dimens.Padding1
 
@@ -22,10 +17,10 @@ import com.ramaa.pmobile_uas.util.Dimens.Padding1
 @Composable
 fun NewsList(
     modifier: Modifier = Modifier,
-    itemCharacters: List<ResultsNewsItem>,
+    itemStocks: List<ResultsNewsItem>,
     onClick: (ResultsNewsItem) -> Unit
 ) {
-    if (itemCharacters.isEmpty()){
+    if (itemStocks.isEmpty()){
         EmptyScreen()
     }
     LazyColumn(
@@ -34,10 +29,10 @@ fun NewsList(
         contentPadding = PaddingValues(all = ExtraSmallPadding2)
     ) {
         items(
-            count = itemCharacters.size,
+            count = itemStocks.size,
         ) {
-            itemCharacters[it].let { character ->
-                NewsCard(itemCharacter = character, onClick = { onClick(character) })
+            itemStocks[it].let { character ->
+                NewsCard(itemNews = character, onClick = { onClick(character) })
             }
         }
     }
@@ -46,10 +41,10 @@ fun NewsList(
 @Composable
 fun NewsList(
     modifier: Modifier = Modifier,
-    characters: LazyPagingItems<ResultsNewsItem>,
+    stocks: LazyPagingItems<ResultsNewsItem>,
     onClick: (ResultsNewsItem) -> Unit
 ) {
-    val handlePagingResult = handlePagingResult(characters)
+    val handlePagingResult = handlePagingResult(stocks)
 
     if (handlePagingResult) {
         LazyColumn(
@@ -58,10 +53,10 @@ fun NewsList(
             contentPadding = PaddingValues(all = ExtraSmallPadding2)
         ) {
             items(
-                count = characters.itemCount,
+                count = stocks.itemCount,
             ) {
-                characters[it]?.let { character ->
-                    NewsCard(itemCharacter = character, onClick = { onClick(character) })
+                stocks[it]?.let { character ->
+                    NewsCard(itemNews = character, onClick = { onClick(character) })
                 }
             }
         }

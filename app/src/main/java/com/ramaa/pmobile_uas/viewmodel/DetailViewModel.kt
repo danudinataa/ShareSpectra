@@ -6,10 +6,9 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ramaa.pmobile_uas.data.remote.response.ResultsStockItem
-import com.ramaa.pmobile_uas.domain.model.ItemCharacter
-import com.ramaa.pmobile_uas.domain.usecases.characters.DeleteCharacter
-import com.ramaa.pmobile_uas.domain.usecases.characters.GetSavedCharacter
-import com.ramaa.pmobile_uas.domain.usecases.characters.UpsertCharacter
+import com.ramaa.pmobile_uas.domain.usecases.stocks.DeleteStock
+import com.ramaa.pmobile_uas.domain.usecases.stocks.GetSavedStock
+import com.ramaa.pmobile_uas.domain.usecases.stocks.UpsertStock
 import com.ramaa.pmobile_uas.presentation.detail.DetailsEvent
 import com.ramaa.pmobile_uas.util.UIComponent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,9 +17,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DetailViewModel @Inject constructor(
-    private val getSavedCharacterUseCase: GetSavedCharacter ,
-    private val deleteCharacterUseCase: DeleteCharacter,
-    private val upsertCharacterUseCase: UpsertCharacter
+    private val getSavedStockUseCase: GetSavedStock,
+    private val deleteStockUseCase: DeleteStock,
+    private val upsertStockUseCase: UpsertStock
 ) : ViewModel() {
 
     var sideEffect by mutableStateOf<UIComponent?>(null)
@@ -28,13 +27,13 @@ class DetailViewModel @Inject constructor(
 
     fun onEvent(event: DetailsEvent) {
         when (event) {
-            is DetailsEvent.UpsertDeleteCharacter -> {
+            is DetailsEvent.UpsertDeleteStock -> {
                 viewModelScope.launch {
-                    val article = getSavedCharacterUseCase(symbol = event.itemCharacter.symbol)
+                    val article = getSavedStockUseCase(symbol = event.itemStock.symbol)
                     if (article == null){
-                        upsertCharacter(itemCharacter = event.itemCharacter)
+                        upsertStock(itemStock = event.itemStock)
                     }else{
-                        deleteCharacter(itemCharacter = event.itemCharacter)
+                        deleteStock(itemStock = event.itemStock)
                     }
                 }
             }
@@ -44,13 +43,13 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    private suspend fun deleteCharacter(itemCharacter: ResultsStockItem) {
-        deleteCharacterUseCase(itemCharacter = itemCharacter)
+    private suspend fun deleteStock(itemStock: ResultsStockItem) {
+        deleteStockUseCase(itemStock = itemStock)
         sideEffect = UIComponent.Toast("Character Deleted from Bookmark!")
     }
 
-    private suspend fun upsertCharacter(itemCharacter: ResultsStockItem) {
-        upsertCharacterUseCase(itemCharacter = itemCharacter)
+    private suspend fun upsertStock(itemStock: ResultsStockItem) {
+        upsertStockUseCase(itemStock = itemStock)
         sideEffect = UIComponent.Toast("Character Added to Bookmark!")
     }
 

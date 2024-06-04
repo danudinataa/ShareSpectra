@@ -10,8 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import com.ramaa.pmobile_uas.ui.theme.LightOrange
-import com.ramaa.pmobile_uas.ui.theme.SoftOrange
+import com.ramaa.pmobile_uas.ui.theme.LightGreen
+import com.ramaa.pmobile_uas.ui.theme.SoftGreen
 import com.ramaa.pmobile_uas.util.Dimens.IndicatorSize
 
 @Composable
@@ -19,8 +19,8 @@ fun PagerIndicator(
     modifier: Modifier = Modifier,
     pagesSize: Int,
     selectedPage: Int,
-    selectedColor: Color = LightOrange,
-    unselectedColor: Color = SoftOrange,
+    selectedColor: Color = LightGreen,
+    unselectedColor: Color = SoftGreen,
 ) {
     Row(modifier = modifier, horizontalArrangement = Arrangement.SpaceBetween) {
         repeat(times = pagesSize) { page ->

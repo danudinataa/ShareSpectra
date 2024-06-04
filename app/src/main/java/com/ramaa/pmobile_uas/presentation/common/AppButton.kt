@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.ramaa.pmobile_uas.ui.theme.BrownWalnut
-import com.ramaa.pmobile_uas.ui.theme.Orange
+import com.ramaa.pmobile_uas.ui.theme.Green
 
 @Composable
 fun AppButton(
@@ -22,7 +22,7 @@ fun AppButton(
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Orange,
+            containerColor = Green,
             contentColor = Color.White
         ),
         shape = RoundedCornerShape(size = 6.dp)

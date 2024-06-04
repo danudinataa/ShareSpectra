@@ -4,5 +4,5 @@ sealed class SearchEvent {
 
     data class UpdateSearchQuery(val searchQuery: String) : SearchEvent()
 
-    object SearchCharacters : SearchEvent()
+    object SearchCompanies : SearchEvent()
 }

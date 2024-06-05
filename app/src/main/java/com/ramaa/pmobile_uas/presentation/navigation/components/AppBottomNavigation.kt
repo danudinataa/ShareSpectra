@@ -21,7 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ramaa.pmobile_uas.R
-import com.ramaa.pmobile_uas.ui.theme.NarutoWikiTheme
+import com.ramaa.pmobile_uas.ui.theme.ShareSpectraTheme
 import com.ramaa.pmobile_uas.util.Dimens.ExtraSmallPadding2
 import com.ramaa.pmobile_uas.util.Dimens.IconSize
 
@@ -73,7 +73,7 @@ data class BottomNavigationItem(
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun NewsBottomNavigationPreview() {
-    NarutoWikiTheme(dynamicColor = false) {
+    ShareSpectraTheme(dynamicColor = false) {
         AppBottomNavigation(items = listOf(
             BottomNavigationItem(icon = R.drawable.baseline_home_24, text = "Home", contentDescription = "home_page"),
             BottomNavigationItem(icon = R.drawable.baseline_newspaper_24, text = "News", contentDescription = "news_page"),

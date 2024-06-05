@@ -12,4 +12,6 @@ object Constants {
     const val DATABASE_NAME = "stocks_db"
 
     const val API_KEY = "4bccd384-af88-5f56-427f-b47b3f0a"
+
+    const val WEB_ID = "1093664055722-gga3jrksc6hp1t2jcsl1a43rlnntpbes.apps.googleusercontent.com"
 }

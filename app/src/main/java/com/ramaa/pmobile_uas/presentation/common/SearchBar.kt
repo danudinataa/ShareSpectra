@@ -29,7 +29,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ramaa.pmobile_uas.R
-import com.ramaa.pmobile_uas.ui.theme.NarutoWikiTheme
+import com.ramaa.pmobile_uas.ui.theme.ShareSpectraTheme
 import com.ramaa.pmobile_uas.util.Dimens.IconSize
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -115,7 +115,7 @@ fun Modifier.searchBar(): Modifier = composed {
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun SearchBarPreview() {
-    NarutoWikiTheme {
+    ShareSpectraTheme {
         SearchBar(text = "", onValueChange = {}, readOnly = false) {
 
         }

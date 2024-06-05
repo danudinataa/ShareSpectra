@@ -19,13 +19,19 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -39,6 +45,7 @@ import com.ramaa.pmobile_uas.presentation.detail.components.DetailsCompanyTopBar
 import com.ramaa.pmobile_uas.util.Dimens
 import com.ramaa.pmobile_uas.util.Dimens.Padding1
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutScreen(
     navigateUp: () -> Unit,
@@ -46,46 +53,68 @@ fun AboutScreen(
     Column(
         modifier = Modifier
             .fillMaxHeight()
-            .fillMaxWidth()
-            .padding(Padding1),  // Keep padding
+            .fillMaxWidth(),  // Keep padding
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        DetailsCompanyTopBar(
-            onBackClick = navigateUp
-        )
-
-        Text(
-            text = "About Us",
-            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(bottom = Padding1)
-        )
-
-        Image(
-            painter = painterResource(id = R.drawable.ic_app_logo),
-            contentDescription = "App Logo",
-            modifier = Modifier
-                .size(150.dp)
-                .padding(bottom = Padding1)
-        )
-
-        Text(
-            text = stringResource(id = R.string.app_description),
-            style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(bottom = Padding1)
-        )
-
-        // Team Member Grid
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
+        TopAppBar(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(Padding1),
-            verticalArrangement = Arrangement.spacedBy(Padding1)
+            colors = TopAppBarDefaults.mediumTopAppBarColors(
+                containerColor = Color.Transparent,
+                actionIconContentColor = colorResource(id = R.color.body),
+                navigationIconContentColor = colorResource(id = R.color.body),
+            ),
+            title = {
+                Text(
+                    text = "About Us",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = colorResource(id = R.color.text_title),
+                    modifier = Modifier.padding(horizontal = Dimens.Padding1)
+                )
+            },
+            navigationIcon = {
+                IconButton(onClick = navigateUp) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_arrow_back_ios_24),
+                        contentDescription = null,
+                    )
+                }
+            }
+        )
+
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .fillMaxWidth()
+                .padding(Padding1),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            items(teamMembers.size) { index ->
-                TeamMemberCard(teamMember = teamMembers[index])
+
+            Image(
+                painter = painterResource(id = R.drawable.ic_app_logo),
+                contentDescription = "App Logo",
+                modifier = Modifier
+                    .size(150.dp)
+                    .padding(bottom = Padding1)
+            )
+
+            Text(
+                text = stringResource(id = R.string.app_description),
+                style = MaterialTheme.typography.bodyMedium,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(bottom = Padding1)
+            )
+
+            // Team Member Grid
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(Padding1),
+                verticalArrangement = Arrangement.spacedBy(Padding1)
+            ) {
+                items(teamMembers.size) { index ->
+                    TeamMemberCard(teamMember = teamMembers[index])
+                }
             }
         }
     }

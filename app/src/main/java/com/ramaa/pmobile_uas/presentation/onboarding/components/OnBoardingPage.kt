@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.ramaa.pmobile_uas.R
 import com.ramaa.pmobile_uas.presentation.onboarding.Page
-import com.ramaa.pmobile_uas.ui.theme.NarutoWikiTheme
+import com.ramaa.pmobile_uas.ui.theme.ShareSpectraTheme
 import com.ramaa.pmobile_uas.util.Dimens.Padding1
 import com.ramaa.pmobile_uas.util.Dimens.Padding2
 
@@ -58,7 +58,7 @@ fun OnBoardingPage(
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun OnBoardingPagePreview() {
-    NarutoWikiTheme {
+    ShareSpectraTheme {
         OnBoardingPage(
             page = Page(
                 title = R.string.title_page1,

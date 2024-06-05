@@ -14,7 +14,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.ramaa.pmobile_uas.R
-import com.ramaa.pmobile_uas.ui.theme.NarutoWikiTheme
+import com.ramaa.pmobile_uas.ui.theme.ShareSpectraTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -55,7 +55,7 @@ fun DetailsTopBar(
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun DetailsTopBarPreview() {
-    NarutoWikiTheme(dynamicColor = false) {
+    ShareSpectraTheme(dynamicColor = false) {
         DetailsTopBar(
             onBookmarkClick = { /*TODO*/ }
         ) {

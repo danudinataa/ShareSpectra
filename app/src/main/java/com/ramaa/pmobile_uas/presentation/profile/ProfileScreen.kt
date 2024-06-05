@@ -1,5 +1,6 @@
 package com.ramaa.pmobile_uas.presentation.profile
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -19,12 +21,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.ramaa.pmobile_uas.R
 import com.ramaa.pmobile_uas.navgraph.Route
 import com.ramaa.pmobile_uas.presentation.login.UserData
@@ -34,17 +41,16 @@ import com.ramaa.pmobile_uas.util.Dimens
 @Composable
 fun ProfileScreen(
     navController: NavController,
-    userData: UserData?,
-    onSignOut: () -> Unit,
-    onSignIn: () -> Unit
+    currentUser: FirebaseUser?,
+    onSignOutClick: () -> Unit
 ) {
+    Log.d("ProfileScreen", "currentUser: ${currentUser?.email}")
     Column(
         modifier = Modifier
             .fillMaxHeight()
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Spacer(modifier = Modifier.padding(32.dp))
 
         Row(
@@ -61,41 +67,39 @@ fun ProfileScreen(
             }
         }
 
-        Image(
-            painter = painterResource(id = R.drawable.baseline_person_24),
-            contentDescription = "picture_profile",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .clip(CircleShape)
-                .size(200.dp)
-                .border(2.dp, LightGreen, CircleShape)
-        )
-
-        /*if (userData?.profilePictureUrl != null) {
-            AsyncImage(
-                model = userData.profilePictureUrl,
-                contentDescription = "picture_profile",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .clip(CircleShape)
-                    .size(200.dp)
-                    .border(2.dp, LightOrange, CircleShape)
-            )
-        }*/
-
-        Text(
-            text = userData?.username ?: "Nama Pengguna",
-            style = MaterialTheme.typography.titleLarge,
-            color = colorResource(id = R.color.text_title),
-            modifier = Modifier.padding(top = 16.dp)
-        )
-
-        Text(
-            text = userData?.userId ?: "Email Pengguna",
-            style = MaterialTheme.typography.labelMedium,
-            color = colorResource(id = R.color.text_medium),
-            modifier = Modifier.padding(top = 4.dp)
-        )
+        currentUser?.let { user ->
+            user.photoUrl?.let {
+                AsyncImage(
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(it)
+                        .build(),
+                    contentDescription = "Profile Picture",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .clip(CircleShape)
+                        .size(200.dp)
+                        .border(2.dp, LightGreen, CircleShape)
+                )
+            }
+            user.displayName?.let { name ->
+                Text(
+                    text = name,
+                    style = MaterialTheme.typography.titleLarge,
+                    color = colorResource(id = R.color.text_title),
+                    modifier = Modifier.padding(top = 16.dp)
+                )
+            }
+            user.email?.let { mailId ->
+                Text(
+                    text = mailId,
+                    style = MaterialTheme.typography.labelMedium,
+                    color = colorResource(id = R.color.text_medium),
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+            }
+        } ?: run {
+            Log.e("ProfileScreen", "currentUser is null")
+        }
 
         Spacer(modifier = Modifier.weight(1f))
 
@@ -108,32 +112,13 @@ fun ProfileScreen(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        /*Button(
-            onClick = {
-                if (userData != null) {
-                    onSignOut()
-                } else {
-                    onSignIn()
-                }
-            },
+        Button(
+            onClick = { onSignOutClick() },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(Dimens.Padding1)
         ) {
-            Text(text = if (userData != null) "Logout" else "Login")
-        }*/
+            Text(text = "Logout")
+        }
     }
 }
-
-/*
-@Preview(showBackground = true)
-@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun ProfileScreenPreview() {
-    ProfileScreen(
-        navController = rememberNavController(),
-        SignInState(),
-        onSignInClick = {},
-        userData = UserData(userId = "testing", username = "testing", profilePictureUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fprofile-icon&psig=AOvVaw1AFV2XhuAwI3YPocw0QhlV&ust=1717465622621000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIC3hpSovoYDFQAAAAAdAAAAABAJ"),
-        onLogoutClick = {})
-}*/

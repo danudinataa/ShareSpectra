@@ -22,6 +22,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.ramaa.pmobile_uas.R
 import com.ramaa.pmobile_uas.data.remote.response.CompanyResponse
 import com.ramaa.pmobile_uas.data.remote.response.ResultsNewsItem
@@ -34,6 +37,7 @@ import com.ramaa.pmobile_uas.presentation.home.HomeScreen
 import com.ramaa.pmobile_uas.navgraph.Route
 import com.ramaa.pmobile_uas.presentation.detail.AboutScreen
 import com.ramaa.pmobile_uas.presentation.detail.DetailsCompanyScreen
+import com.ramaa.pmobile_uas.presentation.login.LoginScreen
 import com.ramaa.pmobile_uas.presentation.main.MainActivity
 import com.ramaa.pmobile_uas.presentation.news.NewsScreen
 import com.ramaa.pmobile_uas.presentation.profile.ProfileScreen
@@ -170,7 +174,7 @@ fun AppNavigator() {
 
             composable(route = Route.DetailsScreen.route) {
                 val viewModel: DetailViewModel = hiltViewModel()
-                navController.previousBackStackEntry?.savedStateHandle?.get<ResultsStockItem?>("character")
+                navController.previousBackStackEntry?.savedStateHandle?.get<ResultsStockItem?>("stock")
                     ?.let { character ->
                         DetailsScreen(
                             itemStock = character,
@@ -183,7 +187,7 @@ fun AppNavigator() {
             }
             composable(route = Route.DetailsCompanyScreen.route) {
                 val viewModel: DetailCompanyViewModel = hiltViewModel()
-                navController.previousBackStackEntry?.savedStateHandle?.get<CompanyResponse?>("character")
+                navController.previousBackStackEntry?.savedStateHandle?.get<CompanyResponse?>("company")
                     ?.let { character ->
                         DetailsCompanyScreen(
                             itemCompany = character,
@@ -209,17 +213,33 @@ fun AppNavigator() {
                 )
             }
             composable(route = Route.ProfileScreen.route) {
-                OnBackClickStateSaver(navController = navController)
-                val context = LocalContext.current as MainActivity
-                ProfileScreen(
-                    navController = navController,
-                    userData = context.googleAuthUiClient.getSignedInUser(),
-                    onSignOut = {
-
-                    },
-                    onSignIn = {
+                val auth: FirebaseAuth = Firebase.auth
+                val currentUser = auth.currentUser
+                if (currentUser != null) {
+                    OnBackClickStateSaver(navController = navController)
+                    val context = LocalContext.current as MainActivity
+                    ProfileScreen(
+                        navController = navController,
+                        currentUser = currentUser,
+                        onSignOutClick = {
+                            auth.signOut()
+                            navController.navigate(Route.LoginScreen.route) {
+                                popUpTo(Route.LoginScreen.route) { inclusive = true }
+                            }
+                        }
+                    )
+                } else {
+                    navController.navigate(Route.LoginScreen.route) {
+                        popUpTo(Route.HomeScreen.route) { inclusive = true }
                     }
+                }
+            }
 
+            composable(route = Route.LoginScreen.route) {
+                LoginScreen(
+                    onSignInClick = {
+
+                    }
                 )
             }
 
@@ -244,14 +264,14 @@ private fun navigateToTab(navController: NavController, route: String) {
 }
 
 private fun navigateToDetails(navController: NavController, itemCharacter: ResultsStockItem){
-    navController.currentBackStackEntry?.savedStateHandle?.set("character", itemCharacter)
+    navController.currentBackStackEntry?.savedStateHandle?.set("stock", itemCharacter)
     navController.navigate(
         route = Route.DetailsScreen.route
     )
 }
 
 private fun navigateToDetailsCompanies(navController: NavController, itemCharacter: CompanyResponse){
-    navController.currentBackStackEntry?.savedStateHandle?.set("character", itemCharacter)
+    navController.currentBackStackEntry?.savedStateHandle?.set("company", itemCharacter)
     navController.navigate(
         route = Route.DetailsCompanyScreen.route
     )
